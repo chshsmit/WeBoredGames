@@ -1,2 +1,2 @@
-server: node codenames-server/src/index.js
+server: node weboredgames-server/src/index.js
 
