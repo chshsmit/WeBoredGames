@@ -7,8 +7,8 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "ecmaFeatures": {
-      "jsx": true,
-      "es6": true
+      "es6": true,
+      "jsx": true
     },
     "sourceType": "module"
   },
@@ -22,6 +22,15 @@
     "es6": true
   },
   "rules": {
+    // Spacing
+    "no-multi-spaces": "warn",
+    // Ignore console.log errors
+    "no-console": "off",
+    // Semi colons
+    "semi": [
+      "warn",
+      "always"
+    ],
     // Only one react component per file, ignoring stateless comps
     "react/no-multi-comp": [
       2,
@@ -48,8 +57,6 @@
       "warn",
       "prefer-double"
     ],
-    // Spacing
-    "no-multi-spaces": "warn",
     // Tag Spacing
     "react/jsx-tag-spacing": [
       1,
@@ -76,13 +83,6 @@
       {
         "component": true
       }
-    ],
-    // Ignore console.log errors
-    "no-console": "off",
-    // Semi colons
-    "semi": [
-      "warn",
-      "always"
     ],
     // Indents must be of size 2
     "react/jsx-indent": [

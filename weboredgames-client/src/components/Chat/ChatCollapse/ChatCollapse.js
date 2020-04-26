@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Collapse sidebar for chat
 * @created 2020-04-15T13:49:53.964Z-07:00
-* @last-modified 2020-04-15T13:52:41.763Z-07:00
+* @last-modified 2020-04-26T15:12:10.502Z-07:00
 */
 
 // ----------------------------------------------------
