@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T10:50:30.991Z-07:00
-* @last-modified 2020-04-26T15:21:54.700Z-07:00
+* @last-modified 2020-04-26T15:23:36.988Z-07:00
 */
 
 // ----------------------------------------------------
@@ -16,8 +16,8 @@ const mongoose = require('mongoose');
 
 const health = require('./routes/health');
 
-const roomManagement = require('./sockets/roomManagement');
-const chatManagement = require('./sockets/chatManagement');
+const roomManagement = require('./sockets/Room/roomManagement');
+const chatManagement = require('./sockets/Chat/chatManagement');
 const codenamesEvents = require('./sockets/Codenames/codenamesEvents');
 require('dotenv/config');
 
