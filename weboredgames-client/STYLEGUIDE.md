@@ -25,7 +25,7 @@ off the Airbnb React/JSX styleguide found [here](https://github.com/airbnb/javas
 ## Basic Rules
 
 - Only include **one** React component per file.
-  - However, multiple **Stateless**, or **Pure** components are allowed per file.
+  - However, multiple **Stateless** components are allowed per file.
 - Always use JSX syntax
 - **Never** use React.createElement
 - **All statement endings must have a semicolon.**
@@ -58,19 +58,18 @@ function someFunction(paramName, paramTwo) {
 ## Naming Conventions
 
 ### **Extensions**
-- Use ``.jsx`` file extension for ``React`` components
-- Use ``.js`` for vanilla ``Javascript``, utility, ``Redux``, and consant files
+- Use ``.js`` for all files
 
 ### **Filenames**
-- Use PascalCase for Component filenames. E.g., ``MyReactComponent.jsx``
-- Use under_score naming for regular Javascript files. E.g., ``my_vanilla_js_file.js``
+- Use PascalCase for Component, and model based filenames. E.g., `MyReactComponent.js`
+- Use camelcase naming for all other files `myPlainJs.js`
 
 ### **Reference Naming**
 - Use PascalCase for React components and camelCase for their instances.
 
 ```javascript
 //bad
-import myReactComponent from './MyReactComponent';
+import myReactComponent from './myReactComponent';
 
 //good
 import MyReactComponent from './MyReactComponent';
@@ -135,7 +134,7 @@ const MY_CONSTANT_VAR = "Some constant value";
 
 ### **Component Naming**
 
-- Always use the filename as the component name. For example, ```MyReactComponent.jsx``` should have a reference name of ```MyReactComponent```.
+- Always use the filename as the component name. For example, ```MyReactComponent.js``` should have a reference name of ```MyReactComponent```.
 ```javascript
 // bad
 import ReactComponent from './MyReactComponent';
@@ -146,7 +145,7 @@ import MyReactComponent from './MyReactComponent';
 
 ### **Props Naming**
 - Avoid using DOM component prop names for different purposes.
-  - People are expecting props like ``style`` and ``className`` to mean one specific thing. Varying this API for a subset of the app makes the code less readable and less maintainable.
+  - People are expecting props like `style` and `className` to mean one specific thing. Varying this API for a subset of the app makes the code less readable and less maintainable.
 
 ```html
 //bad
@@ -191,28 +190,6 @@ import React, { Component } from 'react';
 export default class MyComp extends Component {
 
 }
-```
-
-- Export components on the line they are declared unless they are connected to Redux.
-```javascript
-//bad
-class MyComponent extends Component {
-
-}
-export default MyComponent;
-
-//good
-export default class MyComponent extends Component {
-
-}
-
-//good: this connects to Redux
-class MyComponent extends Component {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyComponent);
-
 ```
 
 ---
@@ -382,7 +359,7 @@ import {
 
 
 - Separate all main portions of code and functions with a horizontal comment line.
-- There should be two lines of spacing between all lines and the functions above them, and one line of spacing between the line and the section below.  
+- There should be two lines of spacing between all lines and the functions above them, and one line of spacing between the line and the section below.
 - The only exception is the line separating the module docstring from the import statements. There should only be one line of spacing between the line and the top level docstring.
 
 ```javascript
@@ -441,30 +418,6 @@ export default class OtherComp extends Component {
 ---
 
 ## Props
-- Try to limit the number of props a component has. If the amount of props becomes large, use Redux to store them instead to make the code easier to maintain.
-```javascript
-//bad
-<MyComp
-  prop1="something"
-  prop2="something"
-  prop3="something"
-  prop4="something"
-  prop5="something"
-  prop6="something"
-  prop7="something"
-  prop8="something"
-  prop9="something"
-  prop10="something"
-  prop11="something"
-  prop12="something"
-/>
-```
-```javascript
-//Instead store those props in the Redux store so the component declaration is simplified. Now
-// not that many props are being passed down
-<MyComp propOne="something />
-```
-
 
 - Always use camelCase for prop names.
 ```javascript
@@ -538,6 +491,20 @@ function myFunction() {
 }
 ```
 
+- If a component takes more than 3 props, then separate them on their own line
+```javascript
+
+// Bad
+<MyComponent fooOne={1} fooTwo={2} fooThree={3} fooFour={4} />
+
+// Good
+<MyComponent
+  fooOne={1}
+  fooTwo={2}
+  fooThree={3}
+  fooFour={4}
+/>
+```
 
 ---
 
@@ -586,7 +553,7 @@ render() {
 //bad
 <Foo
   longParamName="stuff"
-  anotherLongParamName="
+  anotherLongParamName=""
 />
 ```
 
