@@ -1,0 +1,67 @@
+#wordCard {
+    margin: 1%;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    /* height: 15%; */
+}
+
+#wordCard:hover:enabled {
+    margin: 1%;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    background: lightgrey;
+    /* height: 15%; */
+}
+
+
+.bystander-spymaster {
+    background: tan;
+    color: black;
+}
+
+.red-team-spymaster {
+    background: salmon;
+    color: black;
+}
+
+.assassin-spymaster {
+    color: white;
+    background: black;
+}
+
+.blue-team-spymaster {
+    background: #34a8eb;
+    color: black
+}
+
+/* Selected word classes */
+
+.bystander-word-selected {
+    background: tan;
+    color: tan;
+}
+.bystander-word-selected:hover {
+    color: black;
+}
+
+.red-team-word-selected {
+    background: salmon;
+    color: salmon;
+}
+
+.red-team-word-selected:hover {
+    color: black;
+}
+
+.assassin-word-selected {
+    color: white;
+    background: black;
+}
+
+.blue-team-word-selected {
+    background: #34a8eb;
+    color: #34a8eb
+}
+.blue-team-word-selected:hover {
+    color: black
+}

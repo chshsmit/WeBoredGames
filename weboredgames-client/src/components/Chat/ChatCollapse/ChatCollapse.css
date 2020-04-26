@@ -1,0 +1,18 @@
+.collapse-chat {
+    width: 1%;
+    background: #808080;
+    text-align: center;
+    position: relative;
+}
+
+
+.chat-collapse-icon {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  color: white
+}
+
+.collapse-chat:hover {
+    background: rgba(128, 128, 128, .8);
+}

@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "es6": true
+    },
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+    // Spacing
+    "no-multi-spaces": "warn",
+    // Ignore console.log errors
+    "no-console": "off",
+    // Semi colons
+    "semi": [
+      "warn",
+      "always"
+    ],
+  }
+}

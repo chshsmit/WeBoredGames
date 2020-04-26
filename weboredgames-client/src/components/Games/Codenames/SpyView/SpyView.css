@@ -1,0 +1,16 @@
+.spy-container {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-top: 2%;
+    flex-direction: row;
+    margin-left: 12.5%;
+    color: white;
+}
+
+.spy-clue-information {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    color: white;
+}

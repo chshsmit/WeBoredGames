@@ -1,0 +1,67 @@
+.team-selection-container {
+    text-align: center;
+    /* display: flex; */
+    height: 100%;
+    background-color: #1a1a1d;
+    overflow: auto;
+}
+
+
+.choose-team-header {
+    color: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.team-lists {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.team-selection-buttons {
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+
+
+#redTeamList,
+#redTeamButton {
+    width: 30%;
+    margin-left: 15%
+}
+
+#blueTeamList,
+#blueTeamButton {
+    width: 30%;
+    margin-right: 15%;
+}
+
+
+.confirm-teams {
+    margin-top: 2vh;
+}
+
+#playerTeamItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.player-name {
+    font-size: large;
+}
+
+.spymaster-label {
+  margin-right: 5%;
+}
+
+#spymasterInput {
+    right: 0;
+    margin-right: 5%;
+}
+

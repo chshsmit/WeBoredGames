@@ -1,0 +1,28 @@
+.spymaster-container {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-top: 2%;
+    flex-direction: row;
+    margin-left: 12.5%;
+}
+
+.spymaster-clue {
+  display: flex;
+  flex-direction: row;
+}
+
+.skip-turn-button {
+    width: fit-content;
+    position: relative;
+}
+
+
+.clue-number-input {
+    margin-left: 2px;
+    width: fit-content;
+}
+
+.give-clue-button {
+    margin-left: 2px;
+}

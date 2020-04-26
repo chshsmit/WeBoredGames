@@ -1,0 +1,33 @@
+.main-room-container {
+    height: 100vh;
+    /* background-color: orange; */
+    display: flex;
+    overflow-x: hidden;
+}
+
+.gameplay-container {
+    flex-grow: 1;
+}
+
+
+.chat-container {
+    width: 20%;
+}
+
+.chat-hidden {
+    width: 0%;
+    -webkit-transition: width 0.5s linear;
+       -moz-transition: width 0.5s linear;
+        -ms-transition: width 0.5s linear;
+         -o-transition: width 0.5s linear;
+            transition: width 0.5s linear;
+}
+
+.chat-open {
+     width: 20%;
+     -webkit-transition: width 0.5s linear;
+        -moz-transition: width 0.5s linear;
+         -ms-transition: width 0.5s linear;
+          -o-transition: width 0.5s linear;
+             transition: width 0.5s linear;
+}

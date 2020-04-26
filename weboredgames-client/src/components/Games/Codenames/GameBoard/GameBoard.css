@@ -1,0 +1,55 @@
+.main-gameboard {
+    display: flex;
+    width: 100%;
+    /* margin: 0 10%; */
+    flex-direction: column;
+    height: 100%;
+    background: #1a1a1d;
+}
+
+.codenames-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: white;
+}
+
+.room-leader-resets {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+    margin: 2% 35% 0% 35%;
+}
+
+.main-cards {
+    justify-content: center;
+    width: 75%;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(5, 70px);
+    border: solid 10px;
+    /* margin: auto; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.red-team-border {
+    border-color: rgba(255, 70, 60);
+}
+
+.blue-team-border {
+    border-color: #34a8eb;
+}
+
+.flashing-border {
+    animation: blink-border .5s step-end infinite alternate;
+}
+
+@keyframes blink-border {
+    50% {
+        border-color: transparent;
+    }
+}

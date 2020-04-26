@@ -1,0 +1,35 @@
+.game-selection {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    background: #1a1a1d;
+    color: white;
+    overflow: auto;
+}
+
+.game-selection-header {
+    margin-top: 1%;
+}
+
+#gameSelectionTable {
+    width: 80%;
+    margin: auto;
+    margin-top: 2%;
+    /* color: white; */
+}
+
+.game-selection-table-header {
+    background: white;
+}
+
+#gameSelectionTableBody tr:nth-of-type(odd) {
+  background: lightgrey;
+}
+
+#gameSelectionTableBody tr:nth-of-type(even) {
+  background: white;
+}
+
+.come-back-row {
+ column-span: all;
+}
