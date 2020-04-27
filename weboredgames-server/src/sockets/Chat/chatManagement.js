@@ -3,12 +3,12 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T18:12:07.934Z-07:00
-* @last-modified 2020-04-24T21:41:58.163Z-07:00
+* @last-modified 2020-04-26T19:16:05.080Z-07:00
 */
 
 // ----------------------------------------------------
 
-const Room = require('../models/Room/Room');
+const Room = require('../../models/Room/Room');
 
 // ----------------------------------------------------
 
