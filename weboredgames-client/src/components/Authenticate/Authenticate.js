@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-29T14:16:54.151Z-07:00
+* @last-modified 2020-04-29T14:18:49.586Z-07:00
 */
 
 // ----------------------------------------------------
@@ -85,6 +85,13 @@ const Authenticate = ({}) => {
                   type="submit"
                 >
                   <i className="fab fa-google mr-2" /> Sign in with Google
+                </Button>
+
+                <Button
+                  className="btn-block"
+                  color="link"
+                >
+                  Continue as guest
                 </Button>
               </Form>
             </CardBody>
