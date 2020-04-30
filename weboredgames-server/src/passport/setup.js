@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T16:43:19.879Z-07:00
 * @copyright
-* @last-modified 2020-04-29T17:29:59.557Z-07:00
+* @last-modified 2020-04-30T10:33:03.516Z-07:00
 */
 
 // ----------------------------------------------------
@@ -24,7 +24,6 @@ passport.serializeUser((user, done) => {
 // ----------------------------------------------------
 
 passport.deserializeUser((id, done) => {
-  console.log(id)
   User.findById(id, (err, user) => {
     done(err, user);
   });
@@ -35,7 +34,6 @@ passport.deserializeUser((id, done) => {
 // Local Strategy
 passport.use(
   new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    console.log("Are we ever here")
     // Match the user
     User.findOne({ _email: email })
       .then(user => {

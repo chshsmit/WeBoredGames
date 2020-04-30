@@ -1,10 +1,10 @@
 /**
-* Authenticate.js
+* MainAuthenticationContainer.js
 * @author Christopher Smith
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-29T19:57:12.224Z-07:00
+* @last-modified 2020-04-30T10:34:30.252Z-07:00
 */
 
 // ----------------------------------------------------
@@ -24,11 +24,11 @@ import {
 
 import axios from 'axios';
 
-import './Authenticate.css';
+import './MainAuthenticationContainer.css';
 
 // ----------------------------------------------------
 
-const Authenticate = ({}) => {
+const MainAuthenticationContainer = ({}) => {
 
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
@@ -121,10 +121,10 @@ const Authenticate = ({}) => {
   );
 };
 
-export default Authenticate;
+export default MainAuthenticationContainer;
 
 // ----------------------------------------------------
 
-Authenticate.propTypes = {
+MainAuthenticationContainer.propTypes = {
 
 };
