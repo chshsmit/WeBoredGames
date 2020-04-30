@@ -3,18 +3,18 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T10:50:30.991Z-07:00
-* @last-modified 2020-04-29T20:00:01.321Z-07:00
+* @last-modified 2020-04-30T16:11:37.667Z-07:00
 */
 
 // ----------------------------------------------------
 
 const express = require('express');
-const session = require('express-session');
+// const session = require('express-session');
 const socketio = require('socket.io');
 const http = require('http');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const MongoStore = require('connect-mongo')(session);
+// const MongoStore = require('connect-mongo')(session);
 
 const passport = require('./passport/setup');
 
@@ -52,24 +52,23 @@ const allowCrossDomain = (req, res, next) => {
 
 app.use(allowCrossDomain);
 
-
-// Passport
-app.use(passport.initialize());
-app.use(passport.session());
-
 // Body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Express Session
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET_KEY,
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-);
+// // Express Session
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET_KEY,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection })
+//   })
+// );
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Routes

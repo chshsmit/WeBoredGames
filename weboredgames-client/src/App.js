@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description The main links for the application
  * @created 2020-04-10T21:30:05.300Z-07:00
- * @last-modified 2020-04-30T10:35:08.271Z-07:00
+ * @last-modified 2020-04-30T16:21:45.604Z-07:00
  */
 
 import React from "react";
@@ -16,7 +16,7 @@ import MainAuthenticationContainer from 'components/Authenticate/MainAuthenticat
 const App = () => (
   <Router>
     <Route path="/" exact component={MainAuthenticationContainer} />
-    <Route path="/home" exact component={Join} />
+    <Route path="/home" exact render={(props) => <Join {...props} />} />
     <Route path="/room" exact component={Room} />
   </Router>
 );

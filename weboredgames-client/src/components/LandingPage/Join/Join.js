@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description Joining or creating a room
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-04-20T14:20:31.729Z-07:00
+ * @last-modified 2020-04-30T16:20:23.672Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -22,12 +22,14 @@ import EnterModal from 'components/LandingPage/EnterModal/EnterModal';
 
 // ----------------------------------------------------
 
-const Join = () => {
+const Join = (props) => {
 
   const [modalIsOpen, changeModalVis] = useState(false);
   const [modalType, setModalType] = useState('');
 
   const toggleModal = () => changeModalVis(!modalIsOpen);
+
+  console.log(props.location.state);
 
   return (
     <Container fluid className="join-main-container">

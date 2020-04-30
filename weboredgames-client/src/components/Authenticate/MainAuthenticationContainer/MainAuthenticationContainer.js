@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-30T12:35:22.428Z-07:00
+* @last-modified 2020-04-30T16:22:13.321Z-07:00
 */
 
 // ----------------------------------------------------
@@ -22,6 +22,8 @@ import {
   Row
 } from 'reactstrap';
 
+import { Redirect } from 'react-router-dom';
+
 import axios from 'axios';
 
 import './MainAuthenticationContainer.css';
@@ -38,6 +40,8 @@ const MainAuthenticationContainer = () => {
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
   const [createOpen, toggleCreateAccount] = useState(false);
+  const [authSuccess, changeAuthSuccess] = useState(false);
+  const [userData, changeUserData] = useState(null);
 
   // ----------------------------------------------------
   // Functions
@@ -56,6 +60,8 @@ const MainAuthenticationContainer = () => {
     axios.post('http://localhost:5000/api/auth/login', userData)
       .then(response => {
         console.log(response);
+        changeUserData(response.data.userData);
+        changeAuthSuccess(true);
       })
       .catch(err => {
         console.log(err);
@@ -67,6 +73,19 @@ const MainAuthenticationContainer = () => {
 
   const toggle = () => toggleCreateAccount(!createOpen);
 
+
+  // ----------------------------------------------------
+
+  if (authSuccess) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/home",
+          state: userData
+        }}
+      />
+    );
+  }
 
   // ----------------------------------------------------
 
