@@ -4,12 +4,12 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-29T14:18:49.586Z-07:00
+* @last-modified 2020-04-29T19:57:12.224Z-07:00
 */
 
 // ----------------------------------------------------
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -22,11 +22,35 @@ import {
   Row
 } from 'reactstrap';
 
+import axios from 'axios';
+
 import './Authenticate.css';
 
 // ----------------------------------------------------
 
 const Authenticate = ({}) => {
+
+  const [email, changeEmail] = useState("");
+  const [password, changePassword] = useState("");
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+
+    const userData = {
+      email,
+      password
+    };
+
+    axios.post('http://localhost:5000/api/auth/registerLogin', userData)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+        console.log(err.response);
+      });
+
+  };
 
   return (
     <div className="main-auth-container">
@@ -35,12 +59,13 @@ const Authenticate = ({}) => {
           <Card className="card-signin my-5">
             <CardBody>
               <h5 className="card-title text-center">Sign In</h5>
-              <Form className="form-signin">
+              <Form onSubmit={onSubmit} className="form-signin">
                 <div className="form-label-group">
                   <Input
                     type="email"
                     id="inputEmail"
                     placeholder="Email address"
+                    onChange={(event) => changeEmail(event.target.value)}
                     required
                     autoFocus
                   />
@@ -53,6 +78,7 @@ const Authenticate = ({}) => {
                     id="inputPassword"
                     className="form-control"
                     placeholder="Password"
+                    onChange={(event) => changePassword(event.target.value)}
                     required
                   />
                   <Label htmlFor="inputPassword">Password</Label>
@@ -79,13 +105,6 @@ const Authenticate = ({}) => {
                 </Button>
 
                 <hr className="my-4" />
-                <Button
-                  id="btnGoogle"
-                  className="btn-block text-uppercase"
-                  type="submit"
-                >
-                  <i className="fab fa-google mr-2" /> Sign in with Google
-                </Button>
 
                 <Button
                   className="btn-block"

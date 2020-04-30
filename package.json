@@ -1,0 +1,13 @@
+{
+    "name": "weboredgames",
+    "version": "1.0.0",
+    "description": "This is the root for the weboredgames project",
+    "author": "Christopher Smith",
+    "license": "MIT",
+    "scripts": {
+        "dev-start": "concurrently \"cd weboredgames-server && yarn start\" \"cd weboredgames-client && yarn start\""
+    },
+    "devDependencies": {
+        "concurrently": "^5.2.0"
+    }
+}

@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T10:50:30.991Z-07:00
-* @last-modified 2020-04-29T17:26:15.579Z-07:00
+* @last-modified 2020-04-29T20:00:01.321Z-07:00
 */
 
 // ----------------------------------------------------
@@ -42,6 +42,16 @@ const io = socketio(server);
 // ----------------------------------------------------
 // Middlewares
 // ----------------------------------------------------
+
+const allowCrossDomain = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+};
+
+app.use(allowCrossDomain);
+
 
 // Passport
 app.use(passport.initialize());
