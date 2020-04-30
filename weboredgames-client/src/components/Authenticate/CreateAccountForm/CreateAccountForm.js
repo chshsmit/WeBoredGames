@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Form for the user to create an account
 * @created 2020-04-30T10:45:48.681Z-07:00
-* @last-modified 2020-04-30T10:55:10.383Z-07:00
+* @last-modified 2020-04-30T11:58:42.539Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,7 +20,14 @@ import './CreateAccountForm.css';
 
 // ----------------------------------------------------
 
-const CreateAccountForm = () => {
+const CreateAccountForm = ({ formValues, changeFormValue }) => {
+
+  const changeValue = (event) => {
+    changeFormValue({
+      ...formValues,
+      [event.target.name]: event.target.value
+    });
+  };
 
   return (
     <div className="create-account-form-body">
@@ -30,6 +37,7 @@ const CreateAccountForm = () => {
         type="text"
         name="name"
         placeholder="Full Name"
+        onChange={changeValue}
         required
       />
       <Label htmlFor="email">Email</Label>
@@ -38,22 +46,25 @@ const CreateAccountForm = () => {
         type="email"
         name="email"
         placeholder="Email"
+        onChange={changeValue}
         required
       />
-      <Label htmlForm="passwordMain">Password</Label>
+      <Label htmlFor="passwordMain">Password</Label>
       <Input
         id="passwordMain"
         type="password"
         name="password"
         placeholder="Password"
+        onChange={changeValue}
         required
       />
-      <Label htmlForm="passwordConfirm">Confirm Password</Label>
+      <Label htmlFor="passwordConfirm">Confirm Password</Label>
       <Input
         id="passwordConfirm"
         type="password"
         name="confirmPassword"
         placeholder="Password"
+        onChange={changeValue}
         required
       />
     </div>
@@ -66,5 +77,6 @@ export default CreateAccountForm;
 // ----------------------------------------------------
 
 CreateAccountForm.propTypes = {
-
+  formValues: PropTypes.object,
+  changeFormValue: PropTypes.func
 };
