@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-04-26T19:18:47.923Z-07:00
+* @last-modified 2020-04-30T16:51:32.378Z-07:00
 */
 
 // ----------------------------------------------------
@@ -46,7 +46,7 @@ const mainRoomManagement = (socket, io) => {
 const createNewRoom = (socket) => {
 
 
-  socket.on('createRoom', ({ name, room }, callback) => {
+  socket.on('createRoom', ({ userData, room }, callback) => {
 
     console.log(`SOCKET JOINING ${socket.id}`);
 
@@ -56,24 +56,19 @@ const createNewRoom = (socket) => {
       .exec()
       .then(result => {
         if(result.length !== 0) return callback({ error: "That room name is already taken." });
-        const user = new User({
-          _name: name,
-          _room: room,
-          _id: socket.id
-        });
 
         const newRoom = new Room({
           _name: room,
           _roomLeader: {
-            leaderId: socket.id,
-            leaderName: name
+            leaderId: userData._id,
+            leaderName: userData._name
           },
-          _users: [user]
+          _users: [userData]
         });
         newRoom.save()
           .then(result => {
             socket.join(room);
-            callback({ newRoom: result, id: socket.id });
+            callback({ newRoom: result });
           });
       });
   });
@@ -91,7 +86,7 @@ const createNewRoom = (socket) => {
 
 const joinRoom = (socket) => {
 
-  socket.on("joinRoom", ({ name, room }, callback) => {
+  socket.on("joinRoom", ({ userData, room }, callback) => {
 
     console.log(`SOCKET JOINING ${socket.id}`);
 
@@ -101,16 +96,7 @@ const joinRoom = (socket) => {
       .then(result => {
         if(!result) return callback({ error: "That room does not exist." });
 
-        const user = new User({
-          _name: name,
-          _room: room,
-          _id: socket.id
-        });
-
-        const userExists = result._users.find((user) => user._name === name);
-        if(userExists) return callback({error: "That username is already taken"});
-
-        result._users.push(user);
+        result._users.push(userData);
         result.save()
           .then(result => {
             socket.join(room);

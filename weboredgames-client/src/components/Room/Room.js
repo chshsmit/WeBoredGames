@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-04-22T17:05:01.668Z-07:00
+* @last-modified 2020-04-30T16:49:49.581Z-07:00
 */
 
 // ----------------------------------------------------
@@ -27,26 +27,25 @@ const ENDPOINT = process.env.REACT_APP_SERVER_CONNECT || 'http://localhost:5000/
 
 const Room = ({ location }) => {
 
-  const [name, setName] = useState('');
   const [room, setRoom] = useState('');
-  const [userId, setUserId] = useState('');
   const [roomData, setRoomData] = useState(null);
   const [joinError, setJoinError] = useState(false);
   const [chatVisible, setChatVisibility] = useState(true);
   const [activeGame, setActiveGame] = useState(null);
 
-  const { userName, roomName, type } = location.state;
+  const { userData, roomName, type } = location.state;
 
   useEffect(() => {
 
     socket = io(ENDPOINT);
 
-    setName(userName);
     setRoom(roomName);
 
     if (type === 'create') {
-      socket.emit('createRoom', { name: userName, room: roomName }, (data) => {
-        const { error, newRoom, id } = data;
+      socket.emit('createRoom', { userData: userData, room: roomName }, (data) => {
+        const { error, newRoom } = data;
+
+        console.log(newRoom);
 
         if (error) {
           alert(error);
@@ -55,20 +54,18 @@ const Room = ({ location }) => {
         } else {
           setRoomData(newRoom);
           setJoinError(false);
-          setUserId(id);
         }
       });
     }
 
     if (type === "join") {
-      socket.emit("joinRoom", { name: userName, room: roomName }, (data) => {
-        const { roomData, error, userId } = data;
+      socket.emit("joinRoom", { userData , room: roomName }, (data) => {
+        const { roomData, error } = data;
         if (error) {
           alert(error);
           setJoinError(true);
         } else {
           setRoomData(roomData);
-          setUserId(userId);
           setJoinError(false);
         }
       });
@@ -79,7 +76,7 @@ const Room = ({ location }) => {
       socket.off();
     };
 
-  }, [userName, roomName, type]);
+  }, [userData, roomName, type]);
 
   useEffect(() => {
     socket.on('newRoomData', ({ roomData }) => {
@@ -104,7 +101,7 @@ const Room = ({ location }) => {
   let gamePlayContainer = roomData === null || activeGame === null ? (
     <MainGameSelectionContainer setActiveGame={setActiveGameInRoom} />
   ) : (
-    determineGame(roomData, activeGame, {name, room, userId}, socket)
+    determineGame(roomData, activeGame, {name: userData._name, room, userId: userData._id}, socket)
   );
 
   return (
@@ -127,8 +124,8 @@ const Room = ({ location }) => {
             room={room}
             roomUserData={roomData ? roomData._users : []}
             socket={socket}
-            name={name}
-            currentUserId={userId}
+            name={userData._name}
+            currentUserId={userData._id}
           />
         )}
       </div>

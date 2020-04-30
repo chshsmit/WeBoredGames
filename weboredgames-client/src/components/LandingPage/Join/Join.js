@@ -3,12 +3,13 @@
  * @author Christopher Smith
  * @description Joining or creating a room
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-04-30T16:20:23.672Z-07:00
+ * @last-modified 2020-04-30T16:43:27.254Z-07:00
 */
 
 // -----------------------------------------------------------
 
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -85,6 +86,7 @@ const Join = (props) => {
         isOpen={modalIsOpen}
         toggleVis={toggleModal}
         type={modalType}
+        userData={props.location.state}
       />
     </Container>
   );
@@ -94,4 +96,6 @@ const Join = (props) => {
 
 export default Join;
 
-Join.propTypes = {};
+Join.propTypes = {
+  location: PropTypes.object
+};

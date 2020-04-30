@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to enter or join a room
 * @created 2020-04-11T13:02:00.189Z-07:00
-* @last-modified 2020-04-11T13:31:28.425Z-07:00
+* @last-modified 2020-04-30T16:42:07.621Z-07:00
 */
 
 // ----------------------------------------------------
@@ -28,10 +28,11 @@ import "./EnterModal.css";
 
 // ----------------------------------------------------
 
-const EnterModal = ({ isOpen, toggleVis, type }) => {
+const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
 
-  const [userName, setUserName] = useState('');
   const [roomName, setRoomName] = useState('');
+
+  console.log(userData);
 
 
   // capitalizing the type of the room
@@ -40,7 +41,6 @@ const EnterModal = ({ isOpen, toggleVis, type }) => {
 
   // When the modal toggles we want to reset the state
   const toggle = () => {
-    setUserName('');
     setRoomName('');
     toggleVis();
   };
@@ -52,18 +52,6 @@ const EnterModal = ({ isOpen, toggleVis, type }) => {
     >
       <ModalHeader toggle={toggle}>{`${capitalType} a Room`}</ModalHeader>
       <ModalBody>
-        <Row className="username-input">
-          <Col>
-            <Label for="userNameInput">Enter Username</Label>
-            <Input
-              placeholder="Username"
-              id="userNameInput"
-              type="text"
-              value={userName}
-              onChange={(event) => setUserName(event.target.value)}
-            />
-          </Col>
-        </Row>
         <Row className="roomname-input">
           <Col>
             <Label for="roomNameInput">Enter Room Name</Label>
@@ -81,12 +69,12 @@ const EnterModal = ({ isOpen, toggleVis, type }) => {
         <Link
           to={{
             pathname: "/room",
-            state: { type, userName, roomName }
+            state: { type, userData, roomName }
           }}
         >
           <Button
             color="primary"
-            disabled={!userName || !roomName}
+            disabled={!roomName}
           >
             {capitalType}
           </Button>
@@ -108,5 +96,6 @@ EnterModal.propTypes = {
     "",
     "create",
     "join"
-  ])
+  ]),
+  userData: PropTypes.object,
 };
