@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Routes to handle registration and authentication
 * @created 2020-04-29T16:53:26.856Z-07:00
-* @last-modified 2020-04-30T12:18:45.045Z-07:00
+* @last-modified 2020-04-30T12:53:18.823Z-07:00
 */
 
 // ----------------------------------------------------
@@ -27,7 +27,7 @@ authRouter.post('/login', (req, res, next) => {
 
     req.logIn(user, (err) => {
       if (err) return res.status(400).json({ error: err });
-      return res.status(200).json({ success: `logged in ${user.id}`});
+      return res.status(200).json({ success: `logged in ${user.id}`, userData: user });
     });
   })(req, res, next);
 });

@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to create an account
 * @created 2020-04-30T10:36:21.060Z-07:00
-* @last-modified 2020-04-30T12:45:29.938Z-07:00
+* @last-modified 2020-04-30T12:51:58.341Z-07:00
 */
 
 // ----------------------------------------------------
@@ -44,6 +44,8 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
   const [createErrorVis, changeCreateErrorVis] = useState(false);
   const [createErrorMessage, changeErrorMessage] = useState("");
 
+  const [creationSuccessfulVis, changeCreationSuccessVis] = useState(false);
+
   // ----------------------------------------------------
   // Functions
   // ----------------------------------------------------
@@ -72,12 +74,12 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
     axios.post('http://localhost:5000/api/auth/register', userData)
       .then(response => {
         console.log(response);
+        changeCreationSuccessVis(!creationSuccessfulVis);
+        toggle();
       })
       .catch(err => {
-        console.log(err);
-        console.log(err.response);
         changeErrorMessage(err.response.data.error);
-        changeCreateErrorVis(!createErrorVis)
+        changeCreateErrorVis(!createErrorVis);
       });
 
   };
@@ -117,6 +119,12 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
         headerMessage="Error"
         message={createErrorMessage}
         toggle={() => changeCreateErrorVis(!createErrorVis)}
+      />
+      <AlertModal
+        isOpen={creationSuccessfulVis}
+        headerMessage="Success"
+        message="Account created successfully. Please login to cotinue."
+        toggle={() => changeCreationSuccessVis(!creationSuccessfulVis)}
       />
     </>
   );
