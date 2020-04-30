@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-30T10:43:49.208Z-07:00
+* @last-modified 2020-04-30T12:35:22.428Z-07:00
 */
 
 // ----------------------------------------------------
@@ -53,7 +53,7 @@ const MainAuthenticationContainer = () => {
       password
     };
 
-    axios.post('http://localhost:5000/api/auth/registerLogin', userData)
+    axios.post('http://localhost:5000/api/auth/login', userData)
       .then(response => {
         console.log(response);
       })

@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Form for the user to create an account
 * @created 2020-04-30T10:45:48.681Z-07:00
-* @last-modified 2020-04-30T12:25:49.305Z-07:00
+* @last-modified 2020-04-30T12:27:02.335Z-07:00
 */
 
 // ----------------------------------------------------
@@ -13,8 +13,7 @@ import PropTypes from 'prop-types';
 
 import {
   Label,
-  Input,
-  FormFeedback
+  Input
 } from 'reactstrap';
 
 import './CreateAccountForm.css';
