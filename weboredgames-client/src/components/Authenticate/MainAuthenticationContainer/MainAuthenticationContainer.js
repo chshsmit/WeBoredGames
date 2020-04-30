@@ -4,13 +4,13 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-30T10:34:30.252Z-07:00
+* @last-modified 2020-04-30T10:43:49.208Z-07:00
 */
 
 // ----------------------------------------------------
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import {
   Button,
@@ -26,12 +26,24 @@ import axios from 'axios';
 
 import './MainAuthenticationContainer.css';
 
+import CreateAccountModal from 'components/Authenticate/CreateAccountModal/CreateAccountModal';
+
 // ----------------------------------------------------
 
-const MainAuthenticationContainer = ({}) => {
+const MainAuthenticationContainer = () => {
+
+
+  // ----------------------------------------------------
 
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
+  const [createOpen, toggleCreateAccount] = useState(false);
+
+  // ----------------------------------------------------
+  // Functions
+  // ----------------------------------------------------
+
+  // ----------------------------------------------------
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -49,8 +61,14 @@ const MainAuthenticationContainer = ({}) => {
         console.log(err);
         console.log(err.response);
       });
-
   };
+
+  // ----------------------------------------------------
+
+  const toggle = () => toggleCreateAccount(!createOpen);
+
+
+  // ----------------------------------------------------
 
   return (
     <div className="main-auth-container">
@@ -100,6 +118,7 @@ const MainAuthenticationContainer = ({}) => {
                 <Button
                   color="link"
                   className="btn-block"
+                  onClick={() => toggle()}
                 >
                   {`Don't have an account? Create one now.`}
                 </Button>
@@ -117,6 +136,10 @@ const MainAuthenticationContainer = ({}) => {
           </Card>
         </div>
       </Row>
+      <CreateAccountModal
+        isOpen={createOpen}
+        toggleVisibility={toggle}
+      />
     </div>
   );
 };
