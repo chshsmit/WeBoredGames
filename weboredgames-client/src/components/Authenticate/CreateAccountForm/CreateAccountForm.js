@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Form for the user to create an account
 * @created 2020-04-30T10:45:48.681Z-07:00
-* @last-modified 2020-04-30T11:58:42.539Z-07:00
+* @last-modified 2020-04-30T12:25:49.305Z-07:00
 */
 
 // ----------------------------------------------------
@@ -13,14 +13,15 @@ import PropTypes from 'prop-types';
 
 import {
   Label,
-  Input
+  Input,
+  FormFeedback
 } from 'reactstrap';
 
 import './CreateAccountForm.css';
 
 // ----------------------------------------------------
 
-const CreateAccountForm = ({ formValues, changeFormValue }) => {
+const CreateAccountForm = ({ formValues, changeFormValue, passwordsMatch }) => {
 
   const changeValue = (event) => {
     changeFormValue({
@@ -65,6 +66,8 @@ const CreateAccountForm = ({ formValues, changeFormValue }) => {
         name="confirmPassword"
         placeholder="Password"
         onChange={changeValue}
+        valid={passwordsMatch && formValues.confirmPassword !== ""}
+        invalid={!passwordsMatch && formValues.confirmPassword !== ""}
         required
       />
     </div>
@@ -78,5 +81,6 @@ export default CreateAccountForm;
 
 CreateAccountForm.propTypes = {
   formValues: PropTypes.object,
-  changeFormValue: PropTypes.func
+  changeFormValue: PropTypes.func,
+  passwordsMatch: PropTypes.bool
 };

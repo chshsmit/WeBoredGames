@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to create an account
 * @created 2020-04-30T10:36:21.060Z-07:00
-* @last-modified 2020-04-30T12:00:26.032Z-07:00
+* @last-modified 2020-04-30T12:24:33.927Z-07:00
 */
 
 // ----------------------------------------------------
@@ -28,9 +28,12 @@ import CreateAccountForm from 'components/Authenticate/CreateAccountForm/CreateA
 
 const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
 
-  const [formValues, changeFormValue] = useState({});
-
-  console.log(formValues);
+  const [formValues, changeFormValue] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
   const toggle = () => {
     changeFormValue({});
@@ -48,6 +51,7 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
           <CreateAccountForm
             formValues={formValues}
             changeFormValue={changeFormValue}
+            passwordsMatch={formValues.confirmPassword === formValues.password}
           />
         </ModalBody>
         <ModalFooter>

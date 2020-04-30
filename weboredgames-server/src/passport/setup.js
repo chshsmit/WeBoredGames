@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T16:43:19.879Z-07:00
 * @copyright
-* @last-modified 2020-04-30T10:33:03.516Z-07:00
+* @last-modified 2020-04-30T12:17:01.910Z-07:00
 */
 
 // ----------------------------------------------------
@@ -37,25 +37,9 @@ passport.use(
     // Match the user
     User.findOne({ _email: email })
       .then(user => {
-        //Create new user
+        // If there is no user then this fails
         if (!user) {
-          const newUser = new User({ _email: email, _password: password });
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser._password, salt, (err, hash) => {
-              if (err) throw err;
-              newUser._password = hash;
-              newUser.save()
-                .then(user => {
-                  // console.log(user);
-                  return done(null, user);
-                })
-                .catch(err => {
-                  console.log("Is there an error")
-                  console.log(err);
-                  return done(null, false, { message: err });
-                });
-            });
-          });
+          done(null, false, { message: "This email does not have an account" });
         } else {
           // Match Password
           bcrypt.compare(password, user._password, (err, isMatch) => {
@@ -63,7 +47,7 @@ passport.use(
             if (isMatch) {
               return done(null, user);
             } else {
-              return done(null, false, { message: "Wrong Password" });
+              return done(null, false, { message: "Incorrect Credentials" });
             }
           });
         }
