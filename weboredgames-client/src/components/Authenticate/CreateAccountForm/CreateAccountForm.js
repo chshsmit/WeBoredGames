@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Form for the user to create an account
 * @created 2020-04-30T10:45:48.681Z-07:00
-* @last-modified 2020-04-30T12:27:02.335Z-07:00
+* @last-modified 2020-05-02T15:53:19.007Z-07:00
 */
 
 // ----------------------------------------------------
@@ -29,14 +29,33 @@ const CreateAccountForm = ({ formValues, changeFormValue, passwordsMatch }) => {
     });
   };
 
+
   return (
     <div className="create-account-form-body">
-      <Label htmlFor="fullName">Full Name</Label>
+      <Label htmlFor="userName">Username</Label>
       <Input
-        id="fullName"
+        id="userName"
         type="text"
-        name="name"
-        placeholder="Full Name"
+        name="userName"
+        placeholder="Username"
+        onChange={changeValue}
+        required
+      />
+      <Label htmlFor="firstName">First Name</Label>
+      <Input
+        id="firstName"
+        type="text"
+        name="firstName"
+        placeholder="First Name"
+        onChange={changeValue}
+        required
+      />
+      <Label htmlFor="lastName">Last Name</Label>
+      <Input
+        id="lastName"
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
         onChange={changeValue}
         required
       />
@@ -73,6 +92,8 @@ const CreateAccountForm = ({ formValues, changeFormValue, passwordsMatch }) => {
   );
 
 };
+
+
 
 export default CreateAccountForm;
 

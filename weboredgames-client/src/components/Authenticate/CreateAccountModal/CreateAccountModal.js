@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to create an account
 * @created 2020-04-30T10:36:21.060Z-07:00
-* @last-modified 2020-04-30T12:51:58.341Z-07:00
+* @last-modified 2020-05-02T16:02:32.504Z-07:00
 */
 
 // ----------------------------------------------------
@@ -33,10 +33,12 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
   // ----------------------------------------------------
 
   const [formValues, changeFormValue] = useState({
-    name: "",
+    userName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    firstName: "",
+    lastName: ""
   });
 
   const [wrongPasswordsVis, changeWrongPassVis] = useState(false);
@@ -68,7 +70,9 @@ const CreateAccountModal = ({ isOpen, toggleVisibility }) => {
     const userData = {
       email: formValues.email,
       password: formValues.password,
-      name: formValues.name
+      userName: formValues.userName,
+      firstName: formValues.firstName,
+      lastName: formValues.lastName
     };
 
     axios.post('http://localhost:5000/api/auth/register', userData)
