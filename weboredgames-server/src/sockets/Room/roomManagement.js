@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-04-30T16:51:32.378Z-07:00
+* @last-modified 2020-04-30T19:42:27.583Z-07:00
 */
 
 // ----------------------------------------------------
@@ -120,8 +120,6 @@ const setActiveGame = (socket) => {
         if(!result) return callback({ error: "That room does not exist" });
 
         let gameInstance = gameInstances.getNewGameInstance(gameName, room);
-
-        // result._activeGame = gameInstance;
 
         gameInstance.save()
           .then(result => {

@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main user schema for the application
 * @created 2020-04-18T13:26:37.972Z-07:00
-* @last-modified 2020-04-29T17:32:49.968Z-07:00
+* @last-modified 2020-05-02T14:50:58.541Z-07:00
 */
 
 // ----------------------------------------------------
@@ -34,8 +34,17 @@ const UserSchema = new mongoose.Schema({
   _room: {
     type: String
   },
+  _firstName: {
+    type: String,
+    required: true
+  },
+  _lastName: {
+    type: String,
+    required: true
+  },
   _name: {
-    type: String
+    type: String,
+    required: true
   },
   _email: {
     type: String,

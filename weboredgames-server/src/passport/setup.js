@@ -4,57 +4,34 @@
 * @description
 * @created 2020-04-29T16:43:19.879Z-07:00
 * @copyright
-* @last-modified 2020-04-30T12:17:01.910Z-07:00
+* @last-modified 2020-05-02T14:56:00.401Z-07:00
 */
 
 // ----------------------------------------------------
 
 const bcrypt = require('bcrypt');
 const User = require('../models/User/User');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+
 
 // ----------------------------------------------------
 
-passport.serializeUser((user, done) => {
-  console.log(user);
-  done(null, user.id);
-});
-
-// ----------------------------------------------------
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});
-
-// ----------------------------------------------------
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.SESSION_SECRET_KEY;
 
 // Local Strategy
 passport.use(
-  new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
-    // Match the user
-    User.findOne({ _email: email })
+  new JwtStrategy(opts, (jwt_payload, done) => {
+    User.findById(jwt_payload.id)
       .then(user => {
-        // If there is no user then this fails
-        if (!user) {
-          done(null, false, { message: "This email does not have an account" });
-        } else {
-          // Match Password
-          bcrypt.compare(password, user._password, (err, isMatch) => {
-            if (err) throw err;
-            if (isMatch) {
-              return done(null, user);
-            } else {
-              return done(null, false, { message: "Incorrect Credentials" });
-            }
-          });
-        }
+        if (user) return done(null, user);
+        return done(null, false);
       })
-      .catch(err => {
-        return done(null, false, { message: err });
-      });
+      .catch(err => console.log(err));
   })
 );
 
