@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to enter or join a room
 * @created 2020-04-11T13:02:00.189Z-07:00
-* @last-modified 2020-04-30T16:42:07.621Z-07:00
+* @last-modified 2020-05-02T22:48:08.673Z-07:00
 */
 
 // ----------------------------------------------------
@@ -31,9 +31,6 @@ import "./EnterModal.css";
 const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
 
   const [roomName, setRoomName] = useState('');
-
-  console.log(userData);
-
 
   // capitalizing the type of the room
   let capitalType = type.charAt(0).toUpperCase() + type.slice(1);

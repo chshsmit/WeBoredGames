@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-02T17:46:47.779Z-07:00
+* @last-modified 2020-05-02T22:48:01.019Z-07:00
 */
 
 // ----------------------------------------------------
@@ -51,7 +51,6 @@ export default class GameBoard extends Component {
   render() {
 
     const { gameData, currentUserData, currentUsersTeam, socket, currentUserIsRoomLeader } = this.props;
-    console.log(currentUsersTeam);
 
     let isSpymaster = [gameData._spyMasterBlue, gameData._spyMasterRed].includes(currentUserData.userId);
 
@@ -126,7 +125,6 @@ export default class GameBoard extends Component {
 
   getWordCards() {
     const { gameData, currentUserData, currentUsersTeam, socket } = this.props;
-    console.log(gameData);
 
     const determineCardsTeam = (wordIndex) => {
       if (gameData._blueWords.includes(wordIndex)) return "blue-team";

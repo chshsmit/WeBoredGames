@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main word card for the gameboard
 * @created 2020-04-16T16:58:32.437Z-07:00
-* @last-modified 2020-05-02T17:48:21.338Z-07:00
+* @last-modified 2020-05-02T22:48:04.681Z-07:00
 */
 
 // ----------------------------------------------------
@@ -18,10 +18,6 @@ import './WordCard.css';
 // ----------------------------------------------------
 
 const WordCard = ({ word, cardTeam, gameData, userData, disabled, wordSelected, selectWord, currentUsersTeam }) => {
-
-  console.log(cardTeam);
-  console.log(gameData);
-  console.log(userData);
 
   let className = [gameData._spyMasterBlue, gameData._spyMasterRed].includes(userData.userId) ?
                     `${cardTeam}-spymaster` :

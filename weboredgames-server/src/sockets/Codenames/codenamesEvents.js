@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-04-25T18:01:47.332Z-07:00
+* @last-modified 2020-05-02T22:48:35.723Z-07:00
 */
 
 // ----------------------------------------------------
@@ -230,7 +230,6 @@ const giveClue = (socket, io) => {
 
 const wordSelected = (socket, io) => {
   socket.on('codenamesSelectWord', ({ selectedWord }) => {
-    console.log(selectedWord); // { word: 'LASER', index: 2 }
     Room.findOne({ "_users._id": socket.id }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
