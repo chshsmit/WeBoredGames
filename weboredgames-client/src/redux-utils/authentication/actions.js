@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @created 2020-05-02T17:17:45.644Z-07:00
 * @copyright
-* @last-modified 2020-05-02T17:44:36.007Z-07:00
+* @last-modified 2020-05-02T21:54:35.125Z-07:00
 */
 
 // ----------------------------------------------------
@@ -19,7 +19,7 @@ import jwtDecode from 'jwt-decode';
 // ----------------------------------------------------
 
 export const loginUser = userData => dispatch => {
-  axios.post("http://localhost:5000/api/auth/login", userData)
+  axios.post(`${process.env.REACT_APP_BASE_API_URL}/api/auth/login`, userData)
     .then(res => {
       const { token } = res.data;
       localStorage.setItem("jwtToken", token);
