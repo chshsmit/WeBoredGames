@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-05-03T12:52:00.866Z-07:00
+* @last-modified 2020-05-03T13:02:56.452Z-07:00
 */
 
 // ----------------------------------------------------
@@ -90,6 +90,11 @@ const MainAuthenticationContainer = (props) => {
   return (
     <div className="main-auth-container">
       <Row>
+        <div className="col justify-content-center text-white text-center mt-5">
+          <h1>WeBoredGames</h1>
+        </div>
+      </Row>
+      <Row>
         <div className="col-sm-9 col-md-7 col-lg-5 mx-auto justify-content-center">
           <Card className="card-signin my-5">
             <CardBody>
@@ -117,11 +122,6 @@ const MainAuthenticationContainer = (props) => {
                     required
                   />
                   <Label htmlFor="inputPassword">Password</Label>
-                </div>
-
-                <div className="custom-control custom-checkbox mb-3">
-                  <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                  <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                 </div>
                 <Button
                   className="btn-block text-uppercase"
