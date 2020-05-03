@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description Logged in users home page
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-05-03T11:38:54.685Z-07:00
+ * @last-modified 2020-05-03T12:58:37.491Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -28,9 +28,6 @@ const Home = (props) => {
 
   const [modalIsOpen, changeModalVis] = useState(false);
   const [modalType, setModalType] = useState('');
-
-  console.log(props);
-
   const toggleModal = () => changeModalVis(!modalIsOpen);
 
   return (

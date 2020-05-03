@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal for continuig as a guest
 * @created 2020-05-03T12:41:23.843Z-07:00
-* @last-modified 2020-05-03T12:57:29.520Z-07:00
+* @last-modified 2020-05-03T12:58:23.133Z-07:00
 */
 
 // ----------------------------------------------------
@@ -30,9 +30,6 @@ const GuestAuthentication = ({ toggle, isOpen, authenticateGuest }) => {
 
   const submit = (event) => {
     event.preventDefault();
-
-    console.log("we are here")
-
     authenticateGuest({ userName });
     toggle();
   };

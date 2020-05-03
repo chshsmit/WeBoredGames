@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main navbar component
 * @created 2020-05-02T22:19:20.242Z-07:00
-* @last-modified 2020-05-03T11:37:22.772Z-07:00
+* @last-modified 2020-05-03T12:58:52.792Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -29,8 +29,6 @@ import './HomeNavigation.css';
 // -----------------------------------------------------------
 
 const HomeNavigation = ({ auth, setModalType, toggleModal }) => {
-
-  console.log(auth);
 
   return (
     <Navbar color="dark" dark id="mainNavbar">

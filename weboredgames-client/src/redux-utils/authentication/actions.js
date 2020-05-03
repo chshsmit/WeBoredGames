@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @created 2020-05-02T17:17:45.644Z-07:00
 * @copyright
-* @last-modified 2020-05-03T12:39:34.646Z-07:00
+* @last-modified 2020-05-03T12:59:02.245Z-07:00
 */
 
 // ----------------------------------------------------
@@ -31,7 +31,6 @@ export const loginUser = userData => dispatch => {
       const decoded = jwtDecode(token);
       dispatch(setAuthenticatedUser(decoded));
     }).catch(err => {
-      console.log(err.response.data);
       dispatch(authenticationFailed(err.response.data));
     });
 };
@@ -39,7 +38,6 @@ export const loginUser = userData => dispatch => {
 // ----------------------------------------------------
 
 export const loginGuestUser = userData => dispatch => {
-  console.log(userData);
   axios.post(`${process.env.REACT_APP_BASE_API_URL}/api/auth/loginGuest`, userData)
     .then(res => {
       const { token } = res.data;
@@ -49,7 +47,6 @@ export const loginGuestUser = userData => dispatch => {
       const decoded = jwtDecode(token);
       dispatch(setAuthenticatedUser(decoded));
     }).catch(err => {
-      console.log(err.response.data);
       dispatch(authenticationFailed(err.response.data));
     });
 };

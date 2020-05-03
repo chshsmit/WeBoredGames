@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-03T11:58:58.557Z-07:00
+* @last-modified 2020-05-03T13:00:22.439Z-07:00
 */
 
 // ----------------------------------------------------
@@ -47,7 +47,8 @@ const createNewRoom = (socket) => {
 
   socket.on('createRoom', ({ userData, room }, callback) => {
 
-    console.log(`SOCKET JOINING ${socket.id}`);
+    console.log(`SOCKET JOINING: ${socket.id}`);
+    console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
     // Determine if the room already exists
@@ -88,7 +89,8 @@ const joinRoom = (socket) => {
 
   socket.on("joinRoom", ({ userData, room }, callback) => {
 
-    console.log(`SOCKET JOINING ${socket.id}`);
+    console.log(`SOCKET JOINING: ${socket.id}`);
+    console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
     Room.findOne()
@@ -145,7 +147,7 @@ const disconnectFromRoom = (socket, io) => {
   socket.on('disconnect', () => {
 
     console.log(`SOCKET DISCONNECTING: ${socket.id}`);
-    console.log(socket.playerId);
+    console.log(`PLAYER DISCONNECTING: ${socket.playerId}`);
 
     Room.findOne({ "_users._id": socket.playerId})
       .exec()

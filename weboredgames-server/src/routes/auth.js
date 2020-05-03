@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Routes to handle registration and authentication
 * @created 2020-04-29T16:53:26.856Z-07:00
-* @last-modified 2020-05-03T12:22:41.120Z-07:00
+* @last-modified 2020-05-03T12:59:14.691Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,8 +20,6 @@ const authRouter = express.Router();
 
 authRouter.post('/loginGuest', (req, res) => {
   const { userName } = req.body;
-
-  console.log(userName);
 
   const payload = {
     _id: mongooseId(),
