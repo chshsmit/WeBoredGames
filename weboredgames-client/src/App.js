@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description The main links for the application
  * @created 2020-04-10T21:30:05.300Z-07:00
- * @last-modified 2020-05-02T22:23:20.309Z-07:00
+ * @last-modified 2020-05-02T22:43:32.583Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,8 +20,6 @@ import Home from 'components/HomePage/Home/Home';
 import Room from "components/Room/Room";
 import MainAuthenticationContainer from 'components/Authenticate/MainAuthenticationContainer/MainAuthenticationContainer';
 
-import Navigation from 'components/Navigation/Navigation';
-
 
 // ----------------------------------------------------
 
@@ -37,7 +35,6 @@ if (localStorage.jwtToken) {
 
 const App = () => (
   <Provider store={store}>
-    <Navigation />
     <Router>
       <Route path="/" exact component={MainAuthenticationContainer} />
       <Route path="/home" exact render={(props) => <Home {...props} />} />
