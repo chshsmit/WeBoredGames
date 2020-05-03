@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-04-30T19:42:27.583Z-07:00
+* @last-modified 2020-05-03T11:56:58.866Z-07:00
 */
 
 // ----------------------------------------------------
@@ -49,6 +49,7 @@ const createNewRoom = (socket) => {
   socket.on('createRoom', ({ userData, room }, callback) => {
 
     console.log(`SOCKET JOINING ${socket.id}`);
+    socket.playerId = userData._id;
 
     // Determine if the room already exists
     Room.find()
@@ -89,6 +90,7 @@ const joinRoom = (socket) => {
   socket.on("joinRoom", ({ userData, room }, callback) => {
 
     console.log(`SOCKET JOINING ${socket.id}`);
+    socket.playerId = userData._id;
 
     Room.findOne()
       .where('_name').equals(room)
@@ -144,13 +146,14 @@ const disconnectFromRoom = (socket, io) => {
   socket.on('disconnect', () => {
 
     console.log(`SOCKET DISCONNECTING: ${socket.id}`);
+    console.log(socket.playerId);
 
-    Room.findOne({ "_users._id": socket.id})
+    Room.findOne({ "_users._id": socket.playerId})
       .exec()
       .then(result => {
-        const index = result._users.findIndex((user) => user._id === socket.id);
+        const index = result._users.findIndex((user) => user._id === socket.playerId);
         result._users.splice(index, 1)[0];
-        if(socket.id === result._roomLeader.leaderId && result._users.length !== 0) {
+        if(socket.playerId === result._roomLeader.leaderId && result._users.length !== 0) {
           result._roomLeader = {
             leaderName: result._users[0]._name,
             leaderId: result._users[0]._id
