@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-04-30T16:49:49.581Z-07:00
+* @last-modified 2020-05-02T22:48:16.336Z-07:00
 */
 
 // ----------------------------------------------------
@@ -44,8 +44,6 @@ const Room = ({ location }) => {
     if (type === 'create') {
       socket.emit('createRoom', { userData: userData, room: roomName }, (data) => {
         const { error, newRoom } = data;
-
-        console.log(newRoom);
 
         if (error) {
           alert(error);

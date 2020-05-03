@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Selecting Teams for codenames
 * @created 2020-04-16T11:37:01.583Z-07:00
-* @last-modified 2020-04-25T12:41:23.446Z-07:00
+* @last-modified 2020-05-03T11:43:39.680Z-07:00
 */
 
 // ----------------------------------------------------
@@ -46,12 +46,12 @@ const TeamSelection = (props) => {
   // ----------------------------------------------------
 
   const chooseTeam = (wantedTeam) => {
-    socket.emit("codenamesJoinTeam", { wantedTeam }, () => {
+    socket.emit("codenamesJoinTeam", { wantedTeam, userId: currentUserData.userId }, () => {
     });
   };
 
   const confirmTeams = (spymasters) => {
-    socket.emit("codenamesConfirmTeams", { spymasters }, () => {
+    socket.emit("codenamesConfirmTeams", { spymasters, userId: currentUserData.userId }, () => {
     });
   };
 

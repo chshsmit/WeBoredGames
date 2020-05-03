@@ -1,0 +1,12 @@
+/* #mainNavbar {
+    height: px;
+} */
+
+#whiteText {
+    color: white;
+}
+
+.user-nav-info:hover {
+    cursor: pointer;
+}
+

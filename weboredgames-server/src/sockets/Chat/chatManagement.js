@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T18:12:07.934Z-07:00
-* @last-modified 2020-04-26T19:16:05.080Z-07:00
+* @last-modified 2020-05-02T22:48:29.344Z-07:00
 */
 
 // ----------------------------------------------------
@@ -32,7 +32,6 @@ const sendMessage = (socket, io) => {
       .exec()
       .then(room => {
         io.to(room._name).emit('message', { userId: socket.id, message, name });
-        console.log("We are here")
         callback();
       });
 
