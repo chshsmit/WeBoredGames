@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-05-02T17:43:53.531Z-07:00
+* @last-modified 2020-05-03T12:52:00.866Z-07:00
 */
 
 // ----------------------------------------------------
@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { loginUser } from 'redux-utils/authentication/actions';
+import { loginUser, resetErrors, loginGuestUser } from 'redux-utils/authentication/actions';
 import {
   Button,
   Form,
@@ -29,6 +29,7 @@ import { Redirect } from 'react-router-dom';
 import './MainAuthenticationContainer.css';
 
 import CreateAccountModal from 'components/Authenticate/CreateAccountModal/CreateAccountModal';
+import GuestAuthentication from 'components/Authenticate/GuestAuthentication/GuestAuthentication';
 
 // ----------------------------------------------------
 
@@ -40,6 +41,7 @@ const MainAuthenticationContainer = (props) => {
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
   const [createOpen, toggleCreateAccount] = useState(false);
+  const [guestOpen, toggleGuestAccount] = useState(false);
 
   // ----------------------------------------------------
   // Functions
@@ -60,7 +62,10 @@ const MainAuthenticationContainer = (props) => {
 
   // ----------------------------------------------------
 
-  const toggle = () => toggleCreateAccount(!createOpen);
+  const toggleCreate = () => toggleCreateAccount(!createOpen);
+
+  const toggleGuest = () => toggleGuestAccount(!guestOpen);
+
 
 
   // ----------------------------------------------------
@@ -73,6 +78,11 @@ const MainAuthenticationContainer = (props) => {
         }}
       />
     );
+  }
+
+  if (props.auth.authenticationError) {
+    alert(props.auth.errorMessage);
+    props.resetErrors();
   }
 
   // ----------------------------------------------------
@@ -125,7 +135,7 @@ const MainAuthenticationContainer = (props) => {
                 <Button
                   color="link"
                   className="btn-block"
-                  onClick={() => toggle()}
+                  onClick={() => toggleCreate()}
                 >
                   {`Don't have an account? Create one now.`}
                 </Button>
@@ -135,6 +145,7 @@ const MainAuthenticationContainer = (props) => {
                 <Button
                   className="btn-block"
                   color="link"
+                  onClick={() => toggleGuest()}
                 >
                   Continue as guest
                 </Button>
@@ -145,7 +156,12 @@ const MainAuthenticationContainer = (props) => {
       </Row>
       <CreateAccountModal
         isOpen={createOpen}
-        toggleVisibility={toggle}
+        toggleVisibility={toggleCreate}
+      />
+      <GuestAuthentication
+        isOpen={guestOpen}
+        toggle={toggleGuest}
+        authenticateGuest={props.loginGuestUser}
       />
     </div>
   );
@@ -156,11 +172,13 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { loginUser })(MainAuthenticationContainer);
+export default connect(mapStateToProps, { loginUser, resetErrors, loginGuestUser })(MainAuthenticationContainer);
 
 // ----------------------------------------------------
 
 MainAuthenticationContainer.propTypes = {
   loginUser: PropTypes.func,
-  auth: PropTypes.object
+  auth: PropTypes.object,
+  resetErrors: PropTypes.func,
+  loginGuestUser: PropTypes.func
 };
