@@ -3,13 +3,15 @@
  * @author Christopher Smith
  * @description Joining or creating a room
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-04-30T16:43:27.254Z-07:00
+ * @last-modified 2020-05-02T17:42:14.307Z-07:00
 */
 
 // -----------------------------------------------------------
 
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import {
   Container,
@@ -29,8 +31,6 @@ const Join = (props) => {
   const [modalType, setModalType] = useState('');
 
   const toggleModal = () => changeModalVis(!modalIsOpen);
-
-  console.log(props.location.state);
 
   return (
     <Container fluid className="join-main-container">
@@ -86,7 +86,7 @@ const Join = (props) => {
         isOpen={modalIsOpen}
         toggleVis={toggleModal}
         type={modalType}
-        userData={props.location.state}
+        userData={props.userData}
       />
     </Container>
   );
@@ -94,8 +94,14 @@ const Join = (props) => {
 
 // ----------------------------------------------------
 
-export default Join;
+const mapStateToProps = (state) => {
+  return {
+    userData: state.auth.userData
+  };
+};
+
+export default connect(mapStateToProps)(Join);
 
 Join.propTypes = {
-  location: PropTypes.object
+  userData: PropTypes.object
 };
