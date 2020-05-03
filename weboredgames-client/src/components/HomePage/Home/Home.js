@@ -1,9 +1,9 @@
 /**
- * Join.js
+ * Home.js
  * @author Christopher Smith
- * @description Joining or creating a room
+ * @description Logged in users home page
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-05-02T17:42:14.307Z-07:00
+ * @last-modified 2020-05-02T22:16:16.314Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -19,13 +19,13 @@ import {
   Col,
   Button
 } from "reactstrap";
-import "./Join.css";
+import "./Home.css";
 
-import EnterModal from 'components/LandingPage/EnterModal/EnterModal';
+import EnterModal from 'components/HomePage/EnterModal/EnterModal';
 
 // ----------------------------------------------------
 
-const Join = (props) => {
+const Home = (props) => {
 
   const [modalIsOpen, changeModalVis] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -100,8 +100,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Join);
+export default connect(mapStateToProps)(Home);
 
-Join.propTypes = {
+Home.propTypes = {
   userData: PropTypes.object
 };
