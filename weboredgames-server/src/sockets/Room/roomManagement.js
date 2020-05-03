@@ -3,13 +3,12 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-03T11:56:58.866Z-07:00
+* @last-modified 2020-05-03T11:58:58.557Z-07:00
 */
 
 // ----------------------------------------------------
 
 const Room = require('../../models/Room/Room');
-const User = require('../../models/User/User');
 const gameInstances = require('../../models/allGames');
 
 // ----------------------------------------------------
