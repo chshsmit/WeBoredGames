@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description Logged in users home page
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-05-02T22:45:46.565Z-07:00
+ * @last-modified 2020-05-03T11:38:11.061Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -30,11 +30,13 @@ const Home = (props) => {
   const [modalIsOpen, changeModalVis] = useState(false);
   const [modalType, setModalType] = useState('');
 
+  console.log(props);
+
   const toggleModal = () => changeModalVis(!modalIsOpen);
 
   return (
     <div className="home-page-content">
-      <HomeNavigation />
+      <HomeNavigation toggleModal={toggleModal} setModalType={setModalType} />
       <Container fluid className="join-main-container">
         <Row className="justify-content-center">
           <Col
@@ -44,44 +46,8 @@ const Home = (props) => {
             className="text-center"
           >
             <h1 className="welcome-text">
-              Welcome to WeBoredGames!
+              Welcome to WeBoredGames {props.userData._name}!
             </h1>
-          </Col>
-        </Row>
-        <Row className="justify-content-center join-button-row">
-          <Col
-            xs="6"
-            sm="4"
-            lg="2"
-            className="content-align-end"
-          >
-            <Button
-              onClick={() => {
-                toggleModal();
-                setModalType('create');
-              }}
-              color="success"
-            >
-              <i className="fas fa-plus fa-xs mr-1" />
-              Create a room
-            </Button>
-          </Col>
-          <Col
-            xs="6"
-            sm="4"
-            lg="2"
-            className="content-align-start"
-          >
-            <Button
-              onClick={() => {
-                toggleModal();
-                setModalType('join');
-              }}
-              color="success"
-            >
-              <i className="fas fa-users mr-1 fa-xs" />
-              Join a room
-            </Button>
           </Col>
         </Row>
         <EnterModal

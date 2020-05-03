@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main navbar component
 * @created 2020-05-02T22:19:20.242Z-07:00
-* @last-modified 2020-05-02T22:56:53.556Z-07:00
+* @last-modified 2020-05-03T11:37:22.772Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -21,43 +21,50 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Collapse,
-  NavbarToggler,
-  Dropdown
+  NavLink
 } from 'reactstrap';
 
 import './HomeNavigation.css';
 
 // -----------------------------------------------------------
 
-const HomeNavigation = ({ auth }) => {
+const HomeNavigation = ({ auth, setModalType, toggleModal }) => {
 
   console.log(auth);
 
   return (
-    <Navbar color="light" light id="mainNavbar">
+    <Navbar color="dark" dark id="mainNavbar">
       <NavbarBrand href="/home">WeBoredGames</NavbarBrand>
-      <Collapse isOpen>
-        <Nav navbar>
-          <Dropdown nav inNavbar>
-            <DropdownToggle nav caret>
-              Options
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem>
-                Option 1
-              </DropdownItem>
-              <DropdownItem>
-                Option 2
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>
-                Reset
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </Nav>
-      </Collapse>
+      <Nav>
+        <UncontrolledDropdown nav>
+          <DropdownToggle nav caret id="whiteText">
+            Play
+          </DropdownToggle>
+          <DropdownMenu right>
+            <DropdownItem
+              onClick={() => {
+                toggleModal();
+                setModalType('create');
+              }}
+            >
+              <i className="fas fa-plus fa-xs mr-2" />
+              Create Room
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                toggleModal();
+                setModalType('join');
+              }}
+            >
+              <i className="fas fa-users mr-2 fa-xs" />
+              Join Room
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+        <NavItem id="whiteText">
+          <NavLink onClick={() => console.log("User Info")} className="user-nav-info"><i className="fas fa-user-circle fa-2x" /></NavLink>
+        </NavItem>
+      </Nav>
     </Navbar>
   );
 
@@ -75,5 +82,7 @@ export default connect(mapStateToProps)(HomeNavigation);
 // -----------------------------------------------------------
 
 HomeNavigation.propTypes = {
-  auth: PropTypes.object
+  auth: PropTypes.object,
+  toggleModal: PropTypes.func,
+  setModalType: PropTypes.func
 };
