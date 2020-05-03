@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-02T22:48:01.019Z-07:00
+* @last-modified 2020-05-03T11:51:20.602Z-07:00
 */
 
 // ----------------------------------------------------
@@ -35,15 +35,15 @@ export default class GameBoard extends Component {
   // ----------------------------------------------------
 
   returnToHomeScreen() {
-    const { socket } = this.props;
-    socket.emit("codenamesReturnHome");
+    const { socket, currentUserData } = this.props;
+    socket.emit("codenamesReturnHome", { userId: currentUserData.userId });
   }
 
   // ----------------------------------------------------
 
   startANewGame() {
-    const { socket } = this.props;
-    socket.emit('codenamesStartNew');
+    const { socket, currentUserData } = this.props;
+    socket.emit('codenamesStartNew', { userId: currentUserData.userId });
   }
 
   // ----------------------------------------------------
@@ -85,6 +85,7 @@ export default class GameBoard extends Component {
                 socket={socket}
                 skipDisabled={currentUsersTeam !== gameData._currentTeamsTurn}
                 currentClue={gameData._currentClue}
+                userId={currentUserData.userId}
               />
             ) : (
               <SpyView
@@ -135,7 +136,7 @@ export default class GameBoard extends Component {
     };
 
     const selectWord = (wordObject) => {
-      socket.emit('codenamesSelectWord', { selectedWord: wordObject }, () => {
+      socket.emit('codenamesSelectWord', { selectedWord: wordObject, userId: currentUserData.userId }, () => {
 
       });
     };

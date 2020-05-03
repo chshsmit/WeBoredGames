@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description Logged in users home page
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-05-03T11:38:11.061Z-07:00
+ * @last-modified 2020-05-03T11:38:54.685Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -16,8 +16,7 @@ import { connect } from 'react-redux';
 import {
   Container,
   Row,
-  Col,
-  Button
+  Col
 } from "reactstrap";
 import "./Home.css";
 

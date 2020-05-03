@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-02T22:48:35.723Z-07:00
+* @last-modified 2020-05-03T11:51:01.901Z-07:00
 */
 
 // ----------------------------------------------------
@@ -53,9 +53,9 @@ const codenamesEvents = (socket, io) => {
 */
 
 const addMemberToTeam = (socket, io) => {
-  socket.on("codenamesJoinTeam", ({ wantedTeam }, callback) => {
+  socket.on("codenamesJoinTeam", ({ wantedTeam, userId }, callback) => {
 
-    Room.findOne({ "_users._id": socket.id })
+    Room.findOne({ "_users._id": userId })
       .exec()
       .then(result => {
 
@@ -63,16 +63,16 @@ const addMemberToTeam = (socket, io) => {
           .exec()
           .then(currentGame => {
             if (wantedTeam === 'blue') {
-              const index = currentGame._redTeam.findIndex((player) => player === socket.id);
+              const index = currentGame._redTeam.findIndex((player) => player === userId);
               if(index !== -1) currentGame._redTeam.splice(index, 1)[0];
 
-              if(!currentGame._blueTeam.includes(socket.id)) currentGame._blueTeam.push(socket.id);
+              if(!currentGame._blueTeam.includes(userId)) currentGame._blueTeam.push(userId);
             } else {
               // First check if the player is already on the blue team
-              const index = currentGame._blueTeam.findIndex((player) => player === socket.id);
+              const index = currentGame._blueTeam.findIndex((player) => player === userId);
               if(index !== -1) currentGame._blueTeam.splice(index, 1)[0];
 
-              if(!currentGame._redTeam.includes(socket.id)) currentGame._redTeam.push(socket.id);
+              if(!currentGame._redTeam.includes(userId)) currentGame._redTeam.push(userId);
             }
 
             currentGame.save()
@@ -97,9 +97,9 @@ const addMemberToTeam = (socket, io) => {
 */
 
 const confirmTeams = (socket, io) => {
-  socket.on("codenamesConfirmTeams", ({ spymasters }, callback) => {
+  socket.on("codenamesConfirmTeams", ({ spymasters, userId }, callback) => {
 
-    Room.findOne({ "_users._id": socket.id })
+    Room.findOne({ "_users._id": userId })
       .exec()
       .then(result => {
 
@@ -149,8 +149,8 @@ const confirmTeams = (socket, io) => {
 */
 
 const changeTeamsTurn = (socket, io) => {
-  socket.on("codenamesChangeTeamsTurn", () => {
-    Room.findOne({ "_users._id": socket.id }).exec().then(result => {
+  socket.on("codenamesChangeTeamsTurn", ({ userId }) => {
+    Room.findOne({ "_users._id": userId }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
@@ -198,8 +198,8 @@ const changeTeamsTurn = (socket, io) => {
 */
 
 const giveClue = (socket, io) => {
-  socket.on("codenamesGiveClue", ({ wordCount, clueWord }, callback) => {
-    Room.findOne({ "_users._id": socket.id }).exec().then(result => {
+  socket.on("codenamesGiveClue", ({ wordCount, clueWord, userId }, callback) => {
+    Room.findOne({ "_users._id": userId }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
@@ -229,8 +229,8 @@ const giveClue = (socket, io) => {
 */
 
 const wordSelected = (socket, io) => {
-  socket.on('codenamesSelectWord', ({ selectedWord }) => {
-    Room.findOne({ "_users._id": socket.id }).exec().then(result => {
+  socket.on('codenamesSelectWord', ({ selectedWord, userId }) => {
+    Room.findOne({ "_users._id": userId }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
@@ -326,8 +326,8 @@ const wordSelected = (socket, io) => {
 */
 
 const endGameAndReturnHome = (socket, io) => {
-  socket.on("codenamesReturnHome", () => {
-    Room.findOne({ "_users._id": socket.id }).exec().then(result => {
+  socket.on("codenamesReturnHome", ({ userId }) => {
+    Room.findOne({ "_users._id": userId }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
@@ -350,8 +350,8 @@ const endGameAndReturnHome = (socket, io) => {
 */
 
 const startANewGame = (socket, io) => {
-  socket.on("codenamesStartNew", () => {
-    Room.findOne({ "_users._id": socket.id }).exec().then(result => {
+  socket.on("codenamesStartNew", ({ userId }) => {
+    Room.findOne({ "_users._id": userId }).exec().then(result => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
