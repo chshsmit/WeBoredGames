@@ -4,13 +4,13 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-05-02T17:34:52.870Z-07:00
+* @last-modified 2020-05-02T17:43:53.531Z-07:00
 */
 
 // ----------------------------------------------------
 
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { loginUser } from 'redux-utils/authentication/actions';
@@ -25,8 +25,6 @@ import {
 } from 'reactstrap';
 
 import { Redirect } from 'react-router-dom';
-
-import axios from 'axios';
 
 import './MainAuthenticationContainer.css';
 
@@ -163,5 +161,6 @@ export default connect(mapStateToProps, { loginUser })(MainAuthenticationContain
 // ----------------------------------------------------
 
 MainAuthenticationContainer.propTypes = {
-
+  loginUser: PropTypes.func,
+  auth: PropTypes.object
 };

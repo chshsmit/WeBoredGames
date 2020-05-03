@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main component for Codenames
 * @created 2020-04-15T18:03:36.190Z-07:00
-* @last-modified 2020-04-25T17:04:41.121Z-07:00
+* @last-modified 2020-05-02T17:47:10.859Z-07:00
 */
 
 // ----------------------------------------------------
@@ -23,7 +23,7 @@ const Codenames = ({ roomData, currentUserData, socket, activeGame }) => {
     if (activeGame._redTeam.includes(currentUserId)) return "Red";
     if (activeGame._blueTeam.includes(currentUserId)) return "Blue";
     return "No-Team";
-  }
+  };
 
   return activeGame._teamsConfirmed ? (
     <GameBoard

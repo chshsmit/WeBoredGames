@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-04-25T17:59:30.587Z-07:00
+* @last-modified 2020-05-02T17:46:47.779Z-07:00
 */
 
 // ----------------------------------------------------
@@ -65,7 +65,7 @@ export default class GameBoard extends Component {
             [gameData._designatedBlueGuesser, gameData._designatedRedGuesser].includes(currentUserData.userId)
             && gameData._currentClue.clueWord !== ""
            )
-      )
+      );
 
     return (
       <div className="main-gameboard">
@@ -73,7 +73,7 @@ export default class GameBoard extends Component {
           {gameData._gameResults.gameIsOver ? (
             <h1>{`${gameData._gameResults.gameWinner} Team Wins!`}</h1>
           ) : (
-            <h1>It is {gameData._currentTeamsTurn}'s turn</h1>
+            <h1>It is {gameData._currentTeamsTurn}`&apos`s turn</h1>
           )}
         </div>
         <div className={`main-cards ${borderColorClassName} ${needsFlashingBorder && !gameData._gameResults.gameIsOver ? "flashing-border" : "static-border"}`}>
@@ -134,13 +134,13 @@ export default class GameBoard extends Component {
       if (gameData._assassin.index === wordIndex) return "assassin";
 
       return "bystander";
-    }
+    };
 
     const selectWord = (wordObject) => {
       socket.emit('codenamesSelectWord', { selectedWord: wordObject }, () => {
 
       });
-    }
+    };
 
     return gameData._words.map((word) => (
       <WordCard

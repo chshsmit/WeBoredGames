@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Components only for the spymaster
 * @created 2020-04-21T16:43:56.031Z-07:00
-* @last-modified 2020-04-25T18:04:29.697Z-07:00
+* @last-modified 2020-05-02T17:47:26.742Z-07:00
 */
 
 // ----------------------------------------------------
@@ -32,7 +32,7 @@ const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
 
   const changeTeamsTurn = () => {
     socket.emit("codenamesChangeTeamsTurn");
-  }
+  };
 
   // ----------------------------------------------------
 
@@ -40,8 +40,8 @@ const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
     socket.emit("codenamesGiveClue", { clueWord, wordCount }, () => {
       changeClueWord('');
       changeWordCount(1);
-    })
-  }
+    });
+  };
 
   // ----------------------------------------------------
 
@@ -83,7 +83,7 @@ const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
         Skip
       </Button>
     </div>
-  )
+  );
 
 };
 

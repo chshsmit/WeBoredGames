@@ -3,8 +3,10 @@
  * @author Christopher Smith
  * @description The main links for the application
  * @created 2020-04-10T21:30:05.300Z-07:00
- * @last-modified 2020-05-02T17:39:16.733Z-07:00
- */
+ * @last-modified 2020-05-02T17:45:40.566Z-07:00
+*/
+
+// ----------------------------------------------------
 
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -18,6 +20,9 @@ import Join from 'components/LandingPage/Join/Join';
 import Room from "components/Room/Room";
 import MainAuthenticationContainer from 'components/Authenticate/MainAuthenticationContainer/MainAuthenticationContainer';
 
+
+// ----------------------------------------------------
+
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
@@ -26,6 +31,7 @@ if (localStorage.jwtToken) {
   store.dispatch(setAuthenticatedUser(decoded));
 }
 
+// ----------------------------------------------------
 
 const App = () => (
   <Provider store={store}>
