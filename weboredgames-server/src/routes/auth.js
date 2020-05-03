@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Routes to handle registration and authentication
 * @created 2020-04-29T16:53:26.856Z-07:00
-* @last-modified 2020-05-02T15:13:40.331Z-07:00
+* @last-modified 2020-05-03T12:22:41.120Z-07:00
 */
 
 // ----------------------------------------------------
@@ -12,8 +12,38 @@ const express = require('express');
 const User = require('../models/User/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongooseId = require('mongoose').Types.ObjectId;
 
 const authRouter = express.Router();
+
+// ----------------------------------------------------
+
+authRouter.post('/loginGuest', (req, res) => {
+  const { userName } = req.body;
+
+  console.log(userName);
+
+  const payload = {
+    _id: mongooseId(),
+    _name: userName
+  };
+
+  // The guest token expires in 1 day
+  jwt.sign(
+    payload,
+    process.env.SESSION_SECRET_KEY,
+    {
+      expiresIn: 86400
+    },
+    (err, token) => {
+      res.json({
+        success: true,
+        token: "Bearer " + token
+      });
+    }
+  );
+});
+
 
 // ----------------------------------------------------
 

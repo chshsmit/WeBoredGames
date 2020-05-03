@@ -4,12 +4,11 @@
 * @description
 * @created 2020-04-29T16:43:19.879Z-07:00
 * @copyright
-* @last-modified 2020-05-02T14:56:00.401Z-07:00
+* @last-modified 2020-05-03T12:13:57.194Z-07:00
 */
 
 // ----------------------------------------------------
 
-const bcrypt = require('bcrypt');
 const User = require('../models/User/User');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
