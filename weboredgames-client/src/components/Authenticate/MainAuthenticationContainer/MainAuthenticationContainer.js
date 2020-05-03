@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-04-30T16:22:13.321Z-07:00
+* @last-modified 2020-05-02T17:34:52.870Z-07:00
 */
 
 // ----------------------------------------------------
@@ -12,6 +12,8 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import { loginUser } from 'redux-utils/authentication/actions';
 import {
   Button,
   Form,
@@ -32,7 +34,7 @@ import CreateAccountModal from 'components/Authenticate/CreateAccountModal/Creat
 
 // ----------------------------------------------------
 
-const MainAuthenticationContainer = () => {
+const MainAuthenticationContainer = (props) => {
 
 
   // ----------------------------------------------------
@@ -40,8 +42,6 @@ const MainAuthenticationContainer = () => {
   const [email, changeEmail] = useState("");
   const [password, changePassword] = useState("");
   const [createOpen, toggleCreateAccount] = useState(false);
-  const [authSuccess, changeAuthSuccess] = useState(false);
-  const [userData, changeUserData] = useState(null);
 
   // ----------------------------------------------------
   // Functions
@@ -57,16 +57,7 @@ const MainAuthenticationContainer = () => {
       password
     };
 
-    axios.post('http://localhost:5000/api/auth/login', userData)
-      .then(response => {
-        console.log(response);
-        changeUserData(response.data.userData);
-        changeAuthSuccess(true);
-      })
-      .catch(err => {
-        console.log(err);
-        console.log(err.response);
-      });
+    props.loginUser(userData);
   };
 
   // ----------------------------------------------------
@@ -76,12 +67,11 @@ const MainAuthenticationContainer = () => {
 
   // ----------------------------------------------------
 
-  if (authSuccess) {
+  if (props.auth.isAuthenticated) {
     return (
       <Redirect
         to={{
-          pathname: "/home",
-          state: userData
+          pathname: "/home"
         }}
       />
     );
@@ -163,7 +153,12 @@ const MainAuthenticationContainer = () => {
   );
 };
 
-export default MainAuthenticationContainer;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+
+export default connect(mapStateToProps, { loginUser })(MainAuthenticationContainer);
 
 // ----------------------------------------------------
 

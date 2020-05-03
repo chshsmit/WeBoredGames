@@ -1,28 +1,26 @@
-/**
-* reducer.js
-* @author Christopher Smith
-* @description
-* @created 2020-05-02T15:38:21.717Z-07:00
-* @copyright Main reducer for authentication
-* @last-modified 2020-05-02T16:03:53.049Z-07:00
-*/
-
 import {
+  SET_AUTHENTICATED_USER
 } from './constants';
-
 
 
 const initialState = {
   isAuthenticated: false,
-  user: {},
-  loading: false
+  userData: {}
 };
 
-
 export default function authReducer(state=initialState, action) {
+
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
+
+    case SET_AUTHENTICATED_USER:
+      console.log(payload);
+      state = {
+        isAuthenticated: true,
+        userData: payload
+      };
+      break;
 
     default:
       break;
