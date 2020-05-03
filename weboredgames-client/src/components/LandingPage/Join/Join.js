@@ -3,12 +3,15 @@
  * @author Christopher Smith
  * @description Joining or creating a room
  * @created 2020-04-10T22:15:59.497Z-07:00
- * @last-modified 2020-04-20T14:20:31.729Z-07:00
+ * @last-modified 2020-05-02T17:42:14.307Z-07:00
 */
 
 // -----------------------------------------------------------
 
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
 
 import {
   Container,
@@ -22,7 +25,7 @@ import EnterModal from 'components/LandingPage/EnterModal/EnterModal';
 
 // ----------------------------------------------------
 
-const Join = () => {
+const Join = (props) => {
 
   const [modalIsOpen, changeModalVis] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -83,6 +86,7 @@ const Join = () => {
         isOpen={modalIsOpen}
         toggleVis={toggleModal}
         type={modalType}
+        userData={props.userData}
       />
     </Container>
   );
@@ -90,6 +94,14 @@ const Join = () => {
 
 // ----------------------------------------------------
 
-export default Join;
+const mapStateToProps = (state) => {
+  return {
+    userData: state.auth.userData
+  };
+};
 
-Join.propTypes = {};
+export default connect(mapStateToProps)(Join);
+
+Join.propTypes = {
+  userData: PropTypes.object
+};

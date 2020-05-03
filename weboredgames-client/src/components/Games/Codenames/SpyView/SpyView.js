@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description View for a regular player that is guessing
 * @created 2020-04-24T16:04:12.735Z-07:00
-* @last-modified 2020-04-25T18:02:48.227Z-07:00
+* @last-modified 2020-05-02T17:48:08.234Z-07:00
 */
 
 // ----------------------------------------------------
@@ -21,9 +21,9 @@ import './SpyView.css';
 
 const SpyView = ({ currentlyUsersTurn, currentClue, currentUserIsGuesser }) => {
 
-  let message = currentlyUsersTurn ?
-    'It is currently your teams turn.' :
-    'It is not your teams turn';
+  // let message = currentlyUsersTurn ?
+  //   'It is currently your teams turn.' :
+  //   'It is not your teams turn';
 
   let clueWordText = currentClue.clueWord === "" ?
     "Waiting for clue to be given" :
@@ -43,7 +43,7 @@ const SpyView = ({ currentlyUsersTurn, currentClue, currentUserIsGuesser }) => {
             </>
           ) : (
             <>
-              It is your team's turn and you have <b>{currentClue.maximumGuesses - currentClue.currentGuesses}</b> guesses remaining. <br />
+              It is your team`$apos`s turn and you have <b>{currentClue.maximumGuesses - currentClue.currentGuesses}</b> guesses remaining. <br />
               {currentUserIsGuesser && 'You are currently the guesser for your team. Make a selection when ready.'}
             </>
           )
@@ -70,7 +70,7 @@ const SpyView = ({ currentlyUsersTurn, currentClue, currentUserIsGuesser }) => {
 
     </div>
   );
-}
+};
 
 export default SpyView;
 
