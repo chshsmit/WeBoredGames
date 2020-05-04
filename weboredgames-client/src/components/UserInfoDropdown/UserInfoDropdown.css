@@ -1,0 +1,7 @@
+.user-info-toggle {
+    color: white;
+}
+
+.user-info-toggle:hover {
+    color: lightgrey;
+}

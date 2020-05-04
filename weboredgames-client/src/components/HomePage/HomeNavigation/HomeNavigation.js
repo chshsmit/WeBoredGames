@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main navbar component
 * @created 2020-05-02T22:19:20.242Z-07:00
-* @last-modified 2020-05-03T13:04:08.588Z-07:00
+* @last-modified 2020-05-03T17:36:11.353Z-07:00
 */
 
 // -----------------------------------------------------------
@@ -25,6 +25,8 @@ import {
 } from 'reactstrap';
 
 import './HomeNavigation.css';
+
+import UserInfoDropdown from 'components/UserInfoDropdown/UserInfoDropdown';
 
 // -----------------------------------------------------------
 
@@ -61,9 +63,7 @@ const HomeNavigation = ({ auth, setModalType, toggleModal }) => {
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
-        <NavItem id="whiteText">
-          <NavLink onClick={() => console.log("User Info")} className="user-nav-info"><i className="fas fa-user-circle fa-2x" /></NavLink>
-        </NavItem>
+        <UserInfoDropdown />
       </Nav>
     </Navbar>
   );
