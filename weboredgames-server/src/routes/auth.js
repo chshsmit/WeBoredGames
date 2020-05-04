@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Routes to handle registration and authentication
 * @created 2020-04-29T16:53:26.856Z-07:00
-* @last-modified 2020-05-03T12:59:14.691Z-07:00
+* @last-modified 2020-05-03T17:57:13.757Z-07:00
 */
 
 // ----------------------------------------------------
@@ -55,7 +55,10 @@ authRouter.post('/login', (req, res) => {
       if (isMatch) {
         const payload = {
           _id: user._id,
-          _name: user._name
+          _name: user._name,
+          _email: user._email,
+          _firstName: user._firstName,
+          _lastName: user._lastName
         };
 
         jwt.sign(
