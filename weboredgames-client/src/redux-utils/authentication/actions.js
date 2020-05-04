@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @created 2020-05-02T17:17:45.644Z-07:00
 * @copyright
-* @last-modified 2020-05-03T12:59:02.245Z-07:00
+* @last-modified 2020-05-03T17:45:57.858Z-07:00
 */
 
 // ----------------------------------------------------
@@ -11,7 +11,8 @@
 import {
   SET_AUTHENTICATED_USER,
   AUTHENTICATION_FAILED,
-  RESET_ERRORS
+  RESET_ERRORS,
+  LOGOUT_USER
 } from './constants';
 
 import axios from 'axios';
@@ -76,4 +77,12 @@ export const authenticationFailed = errorData => {
 
 export const resetErrors = () => dispatch => {
   dispatch({ type: RESET_ERRORS });
+};
+
+
+// ---------------------------------------------------
+
+export const logoutUser = () => dispatch => {
+  localStorage.removeItem("jwtToken");
+  dispatch({ type: LOGOUT_USER });
 };
