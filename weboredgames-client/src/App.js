@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description The main links for the application
  * @created 2020-04-10T21:30:05.300Z-07:00
- * @last-modified 2020-05-03T17:46:23.087Z-07:00
+ * @last-modified 2020-05-03T17:53:20.032Z-07:00
 */
 
 // ----------------------------------------------------
@@ -19,7 +19,7 @@ import jwtDecode from 'jwt-decode';
 import Home from 'components/HomePage/Home/Home';
 import Room from "components/Room/Room";
 import MainAuthenticationContainer from 'components/Authenticate/MainAuthenticationContainer/MainAuthenticationContainer';
-
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
 // ----------------------------------------------------
 
@@ -45,8 +45,8 @@ const App = () => (
   <Provider store={store}>
     <Router>
       <Route path="/" exact component={MainAuthenticationContainer} />
-      <Route path="/home" exact render={(props) => <Home {...props} />} />
-      <Route path="/room" exact component={Room} />
+      <PrivateRoute path="/home" exact component={Home} />
+      <PrivateRoute path="/room" exact component={Room} />
     </Router>
   </Provider>
 );
