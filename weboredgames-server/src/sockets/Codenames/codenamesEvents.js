@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-03T11:51:01.901Z-07:00
+* @last-modified 2020-05-04T16:41:57.525Z-07:00
 */
 
 // ----------------------------------------------------
@@ -209,6 +209,19 @@ const giveClue = (socket, io) => {
             maximumGuesses: wordCount + 1,
             currentGuesses: 0
           };
+
+          if (currentGame._currentTeamsTurn === 'Red') {
+            currentGame._clueHistory = {
+              ...currentGame._clueHistory,
+              redClues: [...currentGame._clueHistory.redClues, { wordCount, clueWord }]
+            };
+          } else {
+            currentGame._clueHistory = {
+              ...currentGame._clueHistory,
+              blueClues: [...currentGame._clueHistory.blueClues, { wordCount, clueWord }]
+            };
+          }
+
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });

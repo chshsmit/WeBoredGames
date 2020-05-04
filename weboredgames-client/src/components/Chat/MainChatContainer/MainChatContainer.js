@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main chat feature
 * @created 2020-04-11T17:37:31.415Z-07:00
-* @last-modified 2020-04-20T14:19:01.830Z-07:00
+* @last-modified 2020-05-04T16:20:24.088Z-07:00
 */
 
 // ----------------------------------------------------
@@ -40,7 +40,7 @@ class MainChatContainer extends Component {
   }
 
   render() {
-    const { room, name, socket, roomUserData } = this.props;
+    const { room, name, socket, roomUserData, currentUserId } = this.props;
     const { messages } = this.state;
 
     return (
@@ -53,6 +53,7 @@ class MainChatContainer extends Component {
         <ChatInput
           socket={socket}
           name={name}
+          userId={currentUserId}
         />
       </div>
     );

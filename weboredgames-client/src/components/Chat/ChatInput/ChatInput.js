@@ -4,7 +4,7 @@
 * @description Main input box for sending messages
 * @created 2020-04-11T21:28:11.591Z-07:00
 * @copyright
-* @last-modified 2020-04-13T18:57:43.461Z-07:00
+* @last-modified 2020-05-04T16:20:45.225Z-07:00
 */
 
 // ----------------------------------------------------
@@ -24,13 +24,13 @@ import './ChatInput.css';
 
 // ----------------------------------------------------
 
-const ChatInput = ({ socket, name }) => {
+const ChatInput = ({ socket, name , userId}) => {
   const [message, setMessage] = useState('');
 
   const sendMessage = (event) => {
     event.preventDefault();
 
-    if (message) socket.emit('sendMessage', { message, name }, () => setMessage(''));
+    if (message) socket.emit('sendMessage', { message, name, userId }, () => setMessage(''));
   };
 
   return (
@@ -56,5 +56,6 @@ export default ChatInput;
 
 ChatInput.propTypes = {
   socket: PropTypes.object,
-  name: PropTypes.string
+  name: PropTypes.string,
+  userId: PropTypes.string
 };

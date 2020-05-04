@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-03T11:51:20.602Z-07:00
+* @last-modified 2020-05-04T16:28:14.109Z-07:00
 */
 
 // ----------------------------------------------------
@@ -104,14 +104,14 @@ export default class GameBoard extends Component {
                   color="danger"
                   onClick={this.returnToHomeScreen}
                 >
-                  Back Home
+                  Return to Lobby
                 </Button>
                 <Button
                   className="restart-button"
                   color="success"
                   onClick={this.startANewGame}
                 >
-                  Restart
+                  Restart Game
                 </Button>
               </div>
             )}

@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-18T16:19:06.840Z-07:00
 * @copyright
-* @last-modified 2020-04-25T13:17:50.206Z-07:00
+* @last-modified 2020-05-04T16:29:29.171Z-07:00
 */
 
 // ----------------------------------------------------
@@ -53,6 +53,13 @@ const codenamesSchema = mongoose.Schema({
   _selectedWords: {
     type: Array,
     default: []
+  },
+  _clueHistory: {
+    type: Object,
+    default: {
+      redClues: [],
+      blueClues: []
+    }
   },
   _currentClue: {
     type: Object,
