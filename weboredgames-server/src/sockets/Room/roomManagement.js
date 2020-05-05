@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-03T13:00:22.439Z-07:00
+* @last-modified 2020-05-05T13:40:51.811Z-07:00
 */
 
 // ----------------------------------------------------
