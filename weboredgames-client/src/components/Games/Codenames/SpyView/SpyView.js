@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description View for a regular player that is guessing
 * @created 2020-04-24T16:04:12.735Z-07:00
-* @last-modified 2020-05-03T11:49:33.105Z-07:00
+* @last-modified 2020-05-04T17:42:52.658Z-07:00
 */
 
 // ----------------------------------------------------
@@ -43,7 +43,7 @@ const SpyView = ({ currentlyUsersTurn, currentClue, currentUserIsGuesser }) => {
             </>
           ) : (
             <>
-              It is your team`$apos`s turn and you have <b>{currentClue.maximumGuesses - currentClue.currentGuesses}</b> guesses remaining. <br />
+              It is your team&apos;s turn and you have <b>{currentClue.maximumGuesses - currentClue.currentGuesses}</b> guesses remaining. <br />
               {currentUserIsGuesser && 'You are currently the guesser for your team. Make a selection when ready.'}
             </>
           )

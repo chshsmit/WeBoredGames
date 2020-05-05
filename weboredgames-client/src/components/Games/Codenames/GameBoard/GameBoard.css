@@ -3,8 +3,9 @@
     width: 100%;
     /* margin: 0 10%; */
     flex-direction: column;
-    height: 100%;
-    background: #1a1a1d;
+    height: 100vh;
+    /* background: #1a1a1d; */
+    overflow-y: auto;
 }
 
 .codenames-header {

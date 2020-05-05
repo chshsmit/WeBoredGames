@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Components only for the spymaster
 * @created 2020-04-21T16:43:56.031Z-07:00
-* @last-modified 2020-05-03T11:47:42.781Z-07:00
+* @last-modified 2020-05-04T16:46:57.818Z-07:00
 */
 
 // ----------------------------------------------------
@@ -21,7 +21,7 @@ import './SpymasterView.css';
 
 // ----------------------------------------------------
 
-const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
+const SpymasterView = ({ socket, skipDisabled, currentClue, userId }) => {
 
   // ----------------------------------------------------
 
@@ -31,14 +31,12 @@ const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
   // ----------------------------------------------------
 
   const changeTeamsTurn = () => {
-    const { userId } = this.props;
     socket.emit("codenamesChangeTeamsTurn", { userId });
   };
 
   // ----------------------------------------------------
 
   const giveClue = () => {
-    const { userId } = this.props;
     socket.emit("codenamesGiveClue", { clueWord, wordCount, userId }, () => {
       changeClueWord('');
       changeWordCount(1);
@@ -77,7 +75,7 @@ const SpymasterView = ({ socket, skipDisabled, currentClue }) => {
         </Button>
       </div>
       <Button
-        color="success"
+        color="danger"
         className="skip-turn-button"
         onClick={() => changeTeamsTurn()}
         disabled={skipDisabled}

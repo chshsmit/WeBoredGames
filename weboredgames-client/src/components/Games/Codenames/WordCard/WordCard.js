@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main word card for the gameboard
 * @created 2020-04-16T16:58:32.437Z-07:00
-* @last-modified 2020-05-02T22:48:04.681Z-07:00
+* @last-modified 2020-05-04T16:46:45.475Z-07:00
 */
 
 // ----------------------------------------------------
@@ -30,15 +30,15 @@ const WordCard = ({ word, cardTeam, gameData, userData, disabled, wordSelected, 
       gameData._designatedBlueGuesser === userData.userId;
 
 
-  if (wordSelected) {
-    className = `${cardTeam}-word-selected`;
-  }
+  if (wordSelected) className = `${cardTeam}-word-selected`;
+
+  if(gameData._gameResults.gameIsOver) className = `${cardTeam}-spymaster`;
 
   return (
     <button
       id="wordCard"
       className={className}
-      disabled={disabled || currentUserSpymaster || wordSelected || !isCurrentGuesser}
+      disabled={disabled || currentUserSpymaster || wordSelected || !isCurrentGuesser || gameData._currentClue.clueWord === ""}
       onClick={() => selectWord(word)}
     >
       <b>{word.word}</b>

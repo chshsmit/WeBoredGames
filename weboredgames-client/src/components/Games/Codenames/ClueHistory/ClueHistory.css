@@ -1,0 +1,41 @@
+.clue-history-container {
+    color: white;
+    display: flex;
+    align-items: center;
+    /* padding-left: 5%;
+    padding-right: 5%; */
+    margin-top: 2%;
+    flex-direction: column;
+    width: 100%;
+}
+
+.clue-history {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+
+.red-history {
+  /* margin-right: 5%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 100px;
+  padding-right: 15px;
+  overflow-y: scroll;
+  box-sizing: content-box;
+}
+
+.blue-history {
+  /* margin-right: 5%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 100px;
+  padding-right: 15px;
+  overflow-y: scroll;
+  box-sizing: content-box;
+}
