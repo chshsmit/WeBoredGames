@@ -1,17 +1,20 @@
 .main-room-container {
-    height: 100vh;
+    height: 100%;
     /* background-color: orange; */
+    background-color: #1a1a1d;
     display: flex;
     overflow-x: hidden;
 }
 
 .gameplay-container {
     flex-grow: 1;
+    box-sizing: content-box;
 }
 
 
 .chat-container {
     width: 20%;
+    height: 100vh;
 }
 
 .chat-hidden {

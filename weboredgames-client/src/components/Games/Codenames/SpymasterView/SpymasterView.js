@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Components only for the spymaster
 * @created 2020-04-21T16:43:56.031Z-07:00
-* @last-modified 2020-05-04T16:34:27.344Z-07:00
+* @last-modified 2020-05-04T16:46:57.818Z-07:00
 */
 
 // ----------------------------------------------------
@@ -75,7 +75,7 @@ const SpymasterView = ({ socket, skipDisabled, currentClue, userId }) => {
         </Button>
       </div>
       <Button
-        color="success"
+        color="danger"
         className="skip-turn-button"
         onClick={() => changeTeamsTurn()}
         disabled={skipDisabled}

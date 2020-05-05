@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-04T16:28:14.109Z-07:00
+* @last-modified 2020-05-04T17:42:22.166Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,6 +20,7 @@ import './GameBoard.css';
 import WordCard from 'components/Games/Codenames/WordCard/WordCard';
 import SpymasterView from 'components/Games/Codenames/SpymasterView/SpymasterView';
 import SpyView from 'components/Games/Codenames/SpyView/SpyView';
+import ClueHistory from 'components/Games/Codenames/ClueHistory/ClueHistory';
 
 
 // ----------------------------------------------------
@@ -72,7 +73,7 @@ export default class GameBoard extends Component {
           {gameData._gameResults.gameIsOver ? (
             <h1>{`${gameData._gameResults.gameWinner} Team Wins!`}</h1>
           ) : (
-            <h1>It is {gameData._currentTeamsTurn}`&apos`s turn</h1>
+            <h1>It is {gameData._currentTeamsTurn}&apos;s turn</h1>
           )}
         </div>
         <div className={`main-cards ${borderColorClassName} ${needsFlashingBorder && !gameData._gameResults.gameIsOver ? "flashing-border" : "static-border"}`}>
@@ -94,6 +95,7 @@ export default class GameBoard extends Component {
                 currentUserIsGuesser={currentUsersTeam === "Red" ? gameData._designatedRedGuesser === currentUserData.userId : gameData._designatedBlueGuesser === currentUserData.userId}
               />
             )}
+            <ClueHistory clueHistory={gameData._clueHistory} />
           </>
         ) : (
           <>
