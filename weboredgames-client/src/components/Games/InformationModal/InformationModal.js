@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Information modal for all of the games
 * @created 2020-05-05T13:42:45.276Z-07:00
-* @last-modified 2020-05-05T14:54:13.979Z-07:00
+* @last-modified 2020-05-05T18:12:36.769Z-07:00
 */
 
 // ----------------------------------------------------
@@ -23,7 +23,11 @@ import './InformationModal.css';
 
 const InformationModal = ({ gameName, isOpen, toggle }) => {
   return (
-    <Modal size="lg" isOpen={isOpen} toggle={toggle}>
+    <Modal
+      size="lg"
+      isOpen={isOpen}
+      toggle={toggle}
+    >
       <ModalHeader toggle={toggle}>{gameName} Information</ModalHeader>
       {determineModalComponent(gameName)}
     </Modal>
