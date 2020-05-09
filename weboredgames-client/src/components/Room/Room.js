@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-05-09T11:47:12.207Z-07:00
+* @last-modified 2020-05-09T12:54:31.128Z-07:00
 */
 
 // ----------------------------------------------------
@@ -33,8 +33,6 @@ const Room = ({ location, match }) => {
   const [chatVisible, setChatVisibility] = useState(true);
   const [activeGame, setActiveGame] = useState(null);
 
-  console.log(match.params.roomId);
-
   const { userData, roomName, type } = location.state;
 
   useEffect(() => {
@@ -59,7 +57,7 @@ const Room = ({ location, match }) => {
     }
 
     if (type === "join") {
-      socket.emit("joinRoom", { userData , room: roomName }, (data) => {
+      socket.emit("joinRoom", { userData , room: roomName, roomId: match.params.roomId }, (data) => {
         const { roomData, error } = data;
         if (error) {
           alert(error);

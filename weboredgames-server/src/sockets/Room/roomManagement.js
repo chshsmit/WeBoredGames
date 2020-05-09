@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-09T11:19:02.599Z-07:00
+* @last-modified 2020-05-09T12:54:16.856Z-07:00
 */
 
 // ----------------------------------------------------
@@ -90,11 +90,15 @@ const createNewRoom = (socket) => {
 
 const joinRoom = (socket) => {
 
-  socket.on("joinRoom", ({ userData, room }, callback) => {
+  socket.on("joinRoom", ({ userData, room, roomId }, callback) => {
 
     console.log(`SOCKET JOINING: ${socket.id}`);
     console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
+
+
+    console.log(roomId);
+
 
     Room.findOne()
       .where('_name').equals(room)
