@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description
 * @created 2020-04-11T10:50:30.991Z-07:00
-* @last-modified 2020-05-02T15:08:29.877Z-07:00
+* @last-modified 2020-05-09T12:37:03.626Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,6 +20,7 @@ const passport = require('./passport/setup');
 
 const auth = require('./routes/auth');
 const health = require('./routes/health');
+const roomData = require('./routes/roomData');
 
 const roomManagement = require('./sockets/Room/roomManagement');
 const chatManagement = require('./sockets/Chat/chatManagement');
@@ -45,7 +46,7 @@ const io = socketio(server);
 const allowCrossDomain = (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', '*');
   next();
 };
 
@@ -62,6 +63,7 @@ app.use(passport.initialize());
 // Routes
 app.use("/api/auth", auth);
 app.use(health);
+app.use(roomData);
 
 // Cors
 app.use(cors);

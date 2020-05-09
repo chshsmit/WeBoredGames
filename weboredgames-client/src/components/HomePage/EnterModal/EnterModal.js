@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to enter or join a room
 * @created 2020-04-11T13:02:00.189Z-07:00
-* @last-modified 2020-05-08T19:31:28.001Z-07:00
+* @last-modified 2020-05-09T11:11:47.812Z-07:00
 */
 
 // ----------------------------------------------------
@@ -23,6 +23,8 @@ import {
   Col,
   Label
 } from 'reactstrap';
+
+import { makeId } from 'utils/utils';
 
 import "./EnterModal.css";
 
@@ -65,7 +67,7 @@ const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
       <ModalFooter>
         <Link
           to={{
-            pathname: "/room",
+            pathname: `/room/${makeId(6)}`,
             state: { type, userData, roomName }
           }}
         >

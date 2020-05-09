@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-05-08T18:59:12.021Z-07:00
+* @last-modified 2020-05-09T11:47:12.207Z-07:00
 */
 
 // ----------------------------------------------------
@@ -25,13 +25,15 @@ const ENDPOINT = process.env.REACT_APP_SERVER_CONNECT || 'http://localhost:5000/
 
 // ----------------------------------------------------
 
-const Room = ({ location }) => {
+const Room = ({ location, match }) => {
 
   const [room, setRoom] = useState('');
   const [roomData, setRoomData] = useState(null);
   const [joinError, setJoinError] = useState(false);
   const [chatVisible, setChatVisibility] = useState(true);
   const [activeGame, setActiveGame] = useState(null);
+
+  console.log(match.params.roomId);
 
   const { userData, roomName, type } = location.state;
 
@@ -42,7 +44,7 @@ const Room = ({ location }) => {
     setRoom(roomName);
 
     if (type === 'create') {
-      socket.emit('createRoom', { userData: userData, room: roomName }, (data) => {
+      socket.emit('createRoom', { userData: userData, room: roomName, roomId: match.params.roomId }, (data) => {
         const { error, newRoom } = data;
 
         if (error) {
@@ -136,6 +138,7 @@ const Room = ({ location }) => {
 export default Room;
 
 Room.propTypes = {
-  location: PropTypes.object
+  location: PropTypes.object,
+  match: PropTypes.object
 };
 

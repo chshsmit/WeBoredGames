@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-29T13:43:36.541Z-07:00
 * @copyright
-* @last-modified 2020-05-03T13:02:56.452Z-07:00
+* @last-modified 2020-05-09T12:53:05.183Z-07:00
 */
 
 // ----------------------------------------------------
@@ -28,6 +28,8 @@ import { Redirect } from 'react-router-dom';
 
 import './MainAuthenticationContainer.css';
 
+import axios from 'axios';
+
 import CreateAccountModal from 'components/Authenticate/CreateAccountModal/CreateAccountModal';
 import GuestAuthentication from 'components/Authenticate/GuestAuthentication/GuestAuthentication';
 
@@ -42,6 +44,8 @@ const MainAuthenticationContainer = (props) => {
   const [password, changePassword] = useState("");
   const [createOpen, toggleCreateAccount] = useState(false);
   const [guestOpen, toggleGuestAccount] = useState(false);
+  const [fromRoom, changeFromRoom] = useState(false);
+  const [roomName, setRoomName] = useState("");
 
   // ----------------------------------------------------
   // Functions
@@ -71,13 +75,45 @@ const MainAuthenticationContainer = (props) => {
   // ----------------------------------------------------
 
   if (props.auth.isAuthenticated) {
-    return (
-      <Redirect
-        to={{
-          pathname: "/home"
-        }}
-      />
-    );
+    console.log(props.location);
+    console.log(props);
+
+    if (props.location.state && props.location.state.fromRoom) {
+      console.log("We need to redirect to the room");
+
+      if(fromRoom) {
+        console.log(roomName);
+        console.log(props.auth.userData);
+        return (
+          <Redirect
+            to={{
+              pathname: props.location.state.from.pathname,
+              state: {
+                type: "join",
+                roomName: roomName,
+                userData: props.auth.userData
+              }
+            }}
+          />
+        );
+      }
+
+      let roomId = props.location.state.from.pathname.split('/')[2];
+      axios.get(`${process.env.REACT_APP_BASE_API_URL}/getRoomData/${roomId}`)
+        .then(result => {
+          setRoomName(result.data[0]._name);
+          changeFromRoom(true);
+        });
+    } else {
+      return (
+        <Redirect
+          to={{
+            pathname: "/home"
+          }}
+        />
+      );
+    }
+
   }
 
   if (props.auth.authenticationError) {
@@ -180,5 +216,6 @@ MainAuthenticationContainer.propTypes = {
   loginUser: PropTypes.func,
   auth: PropTypes.object,
   resetErrors: PropTypes.func,
-  loginGuestUser: PropTypes.func
+  loginGuestUser: PropTypes.func,
+  location: PropTypes.object
 };
