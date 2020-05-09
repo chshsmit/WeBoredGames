@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-04T16:41:57.525Z-07:00
+* @last-modified 2020-05-07T20:46:06.595Z-07:00
 */
 
 // ----------------------------------------------------
@@ -372,8 +372,6 @@ const startANewGame = (socket, io) => {
         });
 
       let gameInstance = gameInstances.getNewGameInstance('Codenames', result._name);
-
-      // result._activeGame = gameInstance;
 
       gameInstance.save()
         .then(newGame => {

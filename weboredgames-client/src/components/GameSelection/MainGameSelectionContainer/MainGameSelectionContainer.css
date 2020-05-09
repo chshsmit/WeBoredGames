@@ -33,3 +33,9 @@
 .come-back-row {
  column-span: all;
 }
+
+.leave-lobby {
+    margin-top: 2%;
+    float: right;
+    margin-right: 10%;
+}

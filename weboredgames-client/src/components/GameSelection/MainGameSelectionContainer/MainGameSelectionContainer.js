@@ -3,12 +3,13 @@
 * @author Christopher Smith
 * @description Main component for selecting a game to play
 * @created 2020-04-15T15:10:43.161Z-07:00
-* @last-modified 2020-05-05T13:52:11.640Z-07:00
+* @last-modified 2020-05-08T19:26:24.767Z-07:00
 */
 
 // ----------------------------------------------------
 
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {
@@ -21,21 +22,36 @@ import { GAME_SELECTIONS } from 'models/Games';
 import './MainGameSelectionContainer.css';
 
 import ConfirmGameSelection from 'components/GameSelection/ConfirmGameSelection/ConfirmGameSelection';
+import ConfirmModal from 'components/ConfirmModal/ConfirmModal';
 
 import InformationModal from 'components/Games/InformationModal/InformationModal';
 
 
 // ----------------------------------------------------
 
-const MainGameSelectionContainer = ({ setActiveGame }) => {
+const MainGameSelectionContainer = ({ setActiveGame, socket }) => {
 
   const [confirmOpen, openConfirmModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [infoModalOpen, toggleInfoModal] = useState(false);
   const [gameUserWantsInfoFor, changeGameUserWantsInfoFor] = useState("");
+  const [navModalOpen, changeNavModalVis] = useState(false);
+  const [shouldLeave, letUserLeave] = useState(false);
 
   const toggleConfirm = () => openConfirmModal(!confirmOpen);
   const toggleInfo = () => toggleInfoModal(!infoModalOpen);
+
+  // ----------------------------------------------------
+
+  const toggleNavModal = () => changeNavModalVis(!navModalOpen);
+  const leaveRoom = () => {
+    socket.disconnect();
+    letUserLeave(true);
+  };
+
+  if (shouldLeave) return <Redirect to="/home" />;
+
+  // ----------------------------------------------------
 
   // TODO: Make this a database call instead
   let gameRows = GAME_SELECTIONS.filter(game => game.isActive).map((game) => (
@@ -88,6 +104,25 @@ const MainGameSelectionContainer = ({ setActiveGame }) => {
           </tr>
         </tbody>
       </Table>
+
+
+      <Button
+        className="leave-lobby"
+        color="danger"
+        onClick={toggleNavModal}
+      >
+        Leave Room
+      </Button>
+
+      <ConfirmModal
+        isOpen={navModalOpen}
+        toggle={toggleNavModal}
+        confirmAction={leaveRoom}
+        message="Are you sure you want to leave the room?"
+        confirmButtonText="Leave"
+        cancelButtonText="Stay"
+      />
+
       <ConfirmGameSelection
         selectedGame={selectedGame}
         toggleModal={toggleConfirm}
@@ -109,5 +144,6 @@ const MainGameSelectionContainer = ({ setActiveGame }) => {
 export default MainGameSelectionContainer;
 
 MainGameSelectionContainer.propTypes = {
-  setActiveGame: PropTypes.func
+  setActiveGame: PropTypes.func,
+  socket: PropTypes.object
 };
