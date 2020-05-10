@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-05-02T22:48:16.336Z-07:00
+* @last-modified 2020-05-08T18:59:12.021Z-07:00
 */
 
 // ----------------------------------------------------
@@ -97,7 +97,7 @@ const Room = ({ location }) => {
   if (joinError) return <Redirect to="/" />;
 
   let gamePlayContainer = roomData === null || activeGame === null ? (
-    <MainGameSelectionContainer setActiveGame={setActiveGameInRoom} />
+    <MainGameSelectionContainer socket={socket} setActiveGame={setActiveGameInRoom} />
   ) : (
     determineGame(roomData, activeGame, {name: userData._name, room, userId: userData._id}, socket)
   );

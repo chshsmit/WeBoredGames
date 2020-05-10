@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to enter or join a room
 * @created 2020-04-11T13:02:00.189Z-07:00
-* @last-modified 2020-05-02T22:48:08.673Z-07:00
+* @last-modified 2020-05-08T19:31:28.001Z-07:00
 */
 
 // ----------------------------------------------------
@@ -70,7 +70,7 @@ const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
           }}
         >
           <Button
-            color="primary"
+            color="success"
             disabled={!roomName}
           >
             {capitalType}
