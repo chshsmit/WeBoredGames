@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-13T17:24:57.273Z-07:00
+* @last-modified 2020-05-13T17:33:56.448Z-07:00
 */
 
 // ----------------------------------------------------
@@ -52,11 +52,10 @@ const createNewRoom = (socket) => {
     console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
-    Room.find({ _name: room, _roomCodeWord: roomCodeWord})
+    Room.find({ _name: room})
     .exec()
     .then(result => {
       if(result.length !== 0) return callback({ error: "That room name is already taken." });
-
       console.log(result);
       const newRoom = new Room({
         _name: room,
@@ -67,11 +66,18 @@ const createNewRoom = (socket) => {
         },
         _users: [userData]
       });
-      newRoom.save()
-        .then(result => {
-          socket.join(room);
-          callback({ newRoom: result });
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newRoom._roomCodeWord, salt, (err, hash) => {
+          if (err) throw err;
+          newRoom._roomCodeWord = hash;
+          newRoom.save()
+            .then(result => {
+              socket.join(room);
+              callback({ newRoom: result });
+            });
         });
+      });
     });
   });
 
@@ -94,19 +100,24 @@ const joinRoom = (socket) => {
     console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
-    Room.findOne({ _name: room, _roomCodeWord: roomCodeWord})
+    Room.findOne({ _name: room})
       .exec()
       .then(result => {
         if(!result) return callback({ error: "That room does not exist." });
 
-        result._users.push(userData);
-        result.save()
-          .then(result => {
-            socket.join(room);
-            socket.broadcast.to(room).emit('newRoomData', { roomData: result });
-            callback({ roomData: result, userId: socket.id });
-          });
-
+        bcrypt.compare(roomCodeWord, result._roomCodeWord).then(isMatch => {
+          if (isMatch) {
+            result._users.push(userData);
+            result.save()
+              .then(result => {
+                socket.join(room);
+                socket.broadcast.to(room).emit('newRoomData', { roomData: result });
+                callback({ roomData: result, userId: socket.id });
+              });
+          } else {
+            return callback({ error: `Incorrect credentials for room ${room}`})
+          }
+        });
       });
   });
 };
