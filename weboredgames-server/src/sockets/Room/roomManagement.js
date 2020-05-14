@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-13T17:33:56.448Z-07:00
+* @last-modified 2020-05-13T17:36:20.401Z-07:00
 */
 
 // ----------------------------------------------------
@@ -115,7 +115,7 @@ const joinRoom = (socket) => {
                 callback({ roomData: result, userId: socket.id });
               });
           } else {
-            return callback({ error: `Incorrect credentials for room ${room}`})
+            return callback({ error: `Incorrect credentials for room ${room}`});
           }
         });
       });
