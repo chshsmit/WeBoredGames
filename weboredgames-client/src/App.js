@@ -3,7 +3,7 @@
  * @author Christopher Smith
  * @description The main links for the application
  * @created 2020-04-10T21:30:05.300Z-07:00
- * @last-modified 2020-05-10T13:03:05.717Z-07:00
+ * @last-modified 2020-05-14T16:50:40.310Z-07:00
 */
 
 // ----------------------------------------------------
@@ -23,21 +23,21 @@ import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
 // ----------------------------------------------------
 
-// if (localStorage.jwtToken) {
-//   const token = localStorage.jwtToken;
-//   setAuthToken(token);
+if (localStorage.jwtToken) {
+  const token = localStorage.jwtToken;
+  setAuthToken(token);
 
-//   const decoded = jwtDecode(token);
-//   store.dispatch(setAuthenticatedUser(decoded));
+  const decoded = jwtDecode(token);
+  store.dispatch(setAuthenticatedUser(decoded));
 
-//   // Check for expired token
-//   const currentTime = Date.now() / 1000; // to get milliseconds
-//   if (decoded.exp < currentTime) {
-//     // Logout and return to sign in screen
-//     store.dispatch(logoutUser());
-//     window.location.href = '/';
-//   }
-// }
+  // Check for expired token
+  const currentTime = Date.now() / 1000; // to get milliseconds
+  if (decoded.exp < currentTime) {
+    // Logout and return to sign in screen
+    store.dispatch(logoutUser());
+    window.location.href = '/';
+  }
+}
 
 // ----------------------------------------------------
 
