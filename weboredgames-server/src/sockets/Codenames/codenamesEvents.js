@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-07T20:46:06.595Z-07:00
+* @last-modified 2020-05-14T16:46:35.373Z-07:00
 */
 
 // ----------------------------------------------------
@@ -123,7 +123,9 @@ const confirmTeams = (socket, io) => {
             }
 
             currentGame._designatedRedGuesser = redGuesser;
+            currentGame._redHasGuessed = [redGuesser];
             currentGame._designatedBlueGuesser = blueGuesser;
+            currentGame._blueHasGuessed = [blueGuesser];
 
 
             currentGame.save()
@@ -155,22 +157,34 @@ const changeTeamsTurn = (socket, io) => {
         .exec()
         .then(currentGame => {
 
-          let redGuesser = "";
-          while(redGuesser === "") {
-            let redGuesserIndex = Math.floor(Math.random() * currentGame._redTeam.length);
-            if(currentGame._redTeam[redGuesserIndex] !== currentGame._spyMasterRed) redGuesser = currentGame._redTeam[redGuesserIndex];
+          let newTeam = currentGame._currentTeamsTurn === "Red" ? "Blue" : "Red";
+
+          if (newTeam === 'Red') {
+            let redGuesser = "";
+            if (currentGame._redHasGuessed.length === currentGame._redTeam.length - 1) currentGame._redHasGuessed = [];
+            while(redGuesser === "") {
+              let redGuesserIndex = Math.floor(Math.random() * currentGame._redTeam.length);
+              if(currentGame._redTeam[redGuesserIndex] !== currentGame._spyMasterRed && !currentGame._redHasGuessed.includes(currentGame._redTeam[redGuesserIndex])) redGuesser = currentGame._redTeam[redGuesserIndex];
+            }
+            currentGame._designatedRedGuesser = redGuesser;
+            currentGame._redHasGuessed = [...currentGame._redHasGuessed, redGuesser];
           }
 
-          let blueGuesser = "";
-          while(blueGuesser === "") {
-            let blueGuesserIndex = Math.floor(Math.random() * currentGame._blueTeam.length);
-            if(currentGame._blueTeam[blueGuesserIndex] !== currentGame._spyMasterBlue) blueGuesser = currentGame._blueTeam[blueGuesserIndex];
+          if (newTeam === 'Blue') {
+            let blueGuesser = "";
+            if (currentGame._blueHasGuessed.length === currentGame._blueTeam.length - 1) currentGame._blueHasGuessed = [];
+            while(blueGuesser === "") {
+              let blueGuesserIndex = Math.floor(Math.random() * currentGame._blueTeam.length);
+              if(currentGame._blueTeam[blueGuesserIndex] !== currentGame._spyMasterBlue && !currentGame._blueHasGuessed.includes(currentGame._blueTeam[blueGuesserIndex])) blueGuesser = currentGame._blueTeam[blueGuesserIndex];
+            }
+
+            currentGame._designatedBlueGuesser = blueGuesser;
+            currentGame._blueHasGuessed = [...currentGame._blueHasGuessed, blueGuesser];
           }
 
-          currentGame._designatedRedGuesser = redGuesser;
-          currentGame._designatedBlueGuesser = blueGuesser;
 
-          currentGame._currentTeamsTurn = currentGame._currentTeamsTurn === "Red" ? "Blue" : "Red";
+
+          currentGame._currentTeamsTurn = newTeam;
           currentGame._currentClue = {
             wordCount: 0,
             clueWord: "",
@@ -308,8 +322,32 @@ const wordSelected = (socket, io) => {
             };
 
           } else {
+            let newTeam = currentGame._currentTeamsTurn === "Red" ? "Blue" : "Red";
+
+            if (newTeam === 'Red') {
+              let redGuesser = "";
+              if (currentGame._redHasGuessed.length === currentGame._redTeam.length - 1) currentGame._redHasGuessed = [];
+              while(redGuesser === "") {
+                let redGuesserIndex = Math.floor(Math.random() * currentGame._redTeam.length);
+                if(currentGame._redTeam[redGuesserIndex] !== currentGame._spyMasterRed && !currentGame._redHasGuessed.includes(currentGame._redTeam[redGuesserIndex])) redGuesser = currentGame._redTeam[redGuesserIndex];
+              }
+              currentGame._designatedRedGuesser = redGuesser;
+              currentGame._redHasGuessed = [...currentGame._redHasGuessed, redGuesser];
+            }
+
+            if (newTeam === 'Blue') {
+              let blueGuesser = "";
+              if (currentGame._blueHasGuessed.length === currentGame._blueTeam.length - 1) currentGame._blueHasGuessed = [];
+              while(blueGuesser === "") {
+                let blueGuesserIndex = Math.floor(Math.random() * currentGame._blueTeam.length);
+                if(currentGame._blueTeam[blueGuesserIndex] !== currentGame._spyMasterBlue && !currentGame._blueHasGuessed.includes(currentGame._blueTeam[blueGuesserIndex])) blueGuesser = currentGame._blueTeam[blueGuesserIndex];
+              }
+
+              currentGame._designatedBlueGuesser = blueGuesser;
+              currentGame._blueHasGuessed = [...currentGame._blueHasGuessed, blueGuesser];
+            }
             // Reset _currentClue and switch teams
-            currentGame._currentTeamsTurn = currentGame._currentTeamsTurn === 'Red' ? 'Blue' : 'Red';
+            currentGame._currentTeamsTurn = newTeam;
             currentGame._currentClue = {
               wordCount: 0,
               clueWord: "",

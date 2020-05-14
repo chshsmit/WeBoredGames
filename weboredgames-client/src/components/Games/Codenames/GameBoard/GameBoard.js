@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-08T19:03:32.725Z-07:00
+* @last-modified 2020-05-14T16:49:28.057Z-07:00
 */
 
 // ----------------------------------------------------
@@ -47,6 +47,14 @@ export default class GameBoard extends Component {
     socket.emit('codenamesStartNew', { userId: currentUserData.userId });
   }
 
+
+  // ----------------------------------------------------
+
+  changeTeamsTurn = () => {
+    const { socket, currentUserData } = this.props;
+    socket.emit("codenamesChangeTeamsTurn", { userId: currentUserData.userId });
+  };
+
   // ----------------------------------------------------
 
   render() {
@@ -73,7 +81,17 @@ export default class GameBoard extends Component {
           {gameData._gameResults.gameIsOver ? (
             <h1>{`${gameData._gameResults.gameWinner} Team Wins!`}</h1>
           ) : (
-            <h1>It is {gameData._currentTeamsTurn}&apos;s turn</h1>
+            <>
+              <h1>It is {gameData._currentTeamsTurn}&apos;s turn</h1>
+              <Button
+                className="skip-turn-button"
+                color="danger"
+                disabled={gameData._currentTeamsTurn !== currentUsersTeam || gameData._currentClue.clueWord === ""}
+                onClick={() => this.changeTeamsTurn()}
+              >
+                Skip
+              </Button>
+            </>
           )}
         </div>
         <div className={`main-cards ${borderColorClassName} ${needsFlashingBorder && !gameData._gameResults.gameIsOver ? "flashing-border" : "static-border"}`}>

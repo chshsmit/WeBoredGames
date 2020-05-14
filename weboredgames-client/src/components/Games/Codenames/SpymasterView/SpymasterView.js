@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Components only for the spymaster
 * @created 2020-04-21T16:43:56.031Z-07:00
-* @last-modified 2020-05-04T16:46:57.818Z-07:00
+* @last-modified 2020-05-10T13:36:27.311Z-07:00
 */
 
 // ----------------------------------------------------
@@ -29,10 +29,6 @@ const SpymasterView = ({ socket, skipDisabled, currentClue, userId }) => {
   const [wordCount, changeWordCount] = useState(1);
 
   // ----------------------------------------------------
-
-  const changeTeamsTurn = () => {
-    socket.emit("codenamesChangeTeamsTurn", { userId });
-  };
 
   // ----------------------------------------------------
 
@@ -74,14 +70,6 @@ const SpymasterView = ({ socket, skipDisabled, currentClue, userId }) => {
           {currentClue.clueWord !== "" ? "Locked" : "Give"}
         </Button>
       </div>
-      <Button
-        color="danger"
-        className="skip-turn-button"
-        onClick={() => changeTeamsTurn()}
-        disabled={skipDisabled}
-      >
-        Skip
-      </Button>
     </div>
   );
 

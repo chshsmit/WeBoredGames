@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description View for a regular player that is guessing
 * @created 2020-04-24T16:04:12.735Z-07:00
-* @last-modified 2020-05-04T17:42:52.658Z-07:00
+* @last-modified 2020-05-10T13:07:02.643Z-07:00
 */
 
 // ----------------------------------------------------
@@ -11,9 +11,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-
-} from 'reactstrap';
 
 import './SpyView.css';
 

@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-18T16:19:06.840Z-07:00
 * @copyright
-* @last-modified 2020-05-04T16:29:29.171Z-07:00
+* @last-modified 2020-05-14T16:34:53.991Z-07:00
 */
 
 // ----------------------------------------------------
@@ -39,7 +39,15 @@ const codenamesSchema = mongoose.Schema({
     type: String,
     default: ""
   },
+  _blueHasGuessed: {
+    type: Array,
+    default: []
+  },
   _designatedBlueGuesser: String,
+  _redHasGuessed: {
+    type: Array,
+    default: []
+  },
   _designatedRedGuesser: String,
   _teamsConfirmed: {
     type: Boolean,

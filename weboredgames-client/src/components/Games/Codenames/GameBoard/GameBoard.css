@@ -9,12 +9,26 @@
 }
 
 .codenames-header {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr repeat(1, auto) 1fr;
     width: 100%;
     margin-top: 1%;
     margin-bottom: 1%;
     color: white;
+}
+
+.codenames-header h1 {
+    grid-column-start: 2;
+}
+
+.skip-turn-button {
+    text-align: center;
+}
+
+.skip-turn-button:disabled {
+    cursor: not-allowed;
 }
 
 .room-leader-resets {
