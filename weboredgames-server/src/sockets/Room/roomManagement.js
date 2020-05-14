@@ -3,13 +3,14 @@
 * @author Christopher Smith
 * @description Main Room Management Functions
 * @created 2020-04-11T11:00:55.089Z-07:00
-* @last-modified 2020-05-05T13:40:51.811Z-07:00
+* @last-modified 2020-05-13T17:24:57.273Z-07:00
 */
 
 // ----------------------------------------------------
 
 const Room = require('../../models/Room/Room');
 const gameInstances = require('../../models/allGames');
+const bcrypt = require('bcrypt');
 
 // ----------------------------------------------------
 
@@ -45,33 +46,33 @@ const mainRoomManagement = (socket, io) => {
 const createNewRoom = (socket) => {
 
 
-  socket.on('createRoom', ({ userData, room }, callback) => {
+  socket.on('createRoom', ({ userData, room, roomCodeWord }, callback) => {
 
     console.log(`SOCKET JOINING: ${socket.id}`);
     console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
-    // Determine if the room already exists
-    Room.find()
-      .where('_name').equals(room)
-      .exec()
-      .then(result => {
-        if(result.length !== 0) return callback({ error: "That room name is already taken." });
+    Room.find({ _name: room, _roomCodeWord: roomCodeWord})
+    .exec()
+    .then(result => {
+      if(result.length !== 0) return callback({ error: "That room name is already taken." });
 
-        const newRoom = new Room({
-          _name: room,
-          _roomLeader: {
-            leaderId: userData._id,
-            leaderName: userData._name
-          },
-          _users: [userData]
-        });
-        newRoom.save()
-          .then(result => {
-            socket.join(room);
-            callback({ newRoom: result });
-          });
+      console.log(result);
+      const newRoom = new Room({
+        _name: room,
+        _roomCodeWord: roomCodeWord,
+        _roomLeader: {
+          leaderId: userData._id,
+          leaderName: userData._name
+        },
+        _users: [userData]
       });
+      newRoom.save()
+        .then(result => {
+          socket.join(room);
+          callback({ newRoom: result });
+        });
+    });
   });
 
 };
@@ -87,14 +88,13 @@ const createNewRoom = (socket) => {
 
 const joinRoom = (socket) => {
 
-  socket.on("joinRoom", ({ userData, room }, callback) => {
+  socket.on("joinRoom", ({ userData, room, roomCodeWord }, callback) => {
 
     console.log(`SOCKET JOINING: ${socket.id}`);
     console.log(`PLAYER JOINING: ${userData._id}`);
     socket.playerId = userData._id;
 
-    Room.findOne()
-      .where('_name').equals(room)
+    Room.findOne({ _name: room, _roomCodeWord: roomCodeWord})
       .exec()
       .then(result => {
         if(!result) return callback({ error: "That room does not exist." });

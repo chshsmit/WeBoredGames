@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Modal to enter or join a room
 * @created 2020-04-11T13:02:00.189Z-07:00
-* @last-modified 2020-05-08T19:31:28.001Z-07:00
+* @last-modified 2020-05-13T17:24:04.203Z-07:00
 */
 
 // ----------------------------------------------------
@@ -31,6 +31,7 @@ import "./EnterModal.css";
 const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
 
   const [roomName, setRoomName] = useState('');
+  const [roomCodeWord, setRoomCodeWord] = useState('');
 
   // capitalizing the type of the room
   let capitalType = type.charAt(0).toUpperCase() + type.slice(1);
@@ -51,13 +52,23 @@ const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
       <ModalBody>
         <Row className="roomname-input">
           <Col>
-            <Label for="roomNameInput">Enter Room Name</Label>
+            <Label htmlFor="roomNameInput">Enter Room Name</Label>
             <Input
               placeholder="Room"
               id="roomNameInput"
               type="text"
+              className="room-name-input"
               value={roomName}
               onChange={(event) => setRoomName(event.target.value)}
+            />
+            <Label htmlFor="roomPassword">Room Code Word</Label>
+            <Input
+              placeholder="Code Word"
+              id="roomPassword"
+              type="password"
+              value={roomCodeWord}
+              onChange={(event) => setRoomCodeWord(event.target.value)}
+              autoComplete="new-password"
             />
           </Col>
         </Row>
@@ -66,12 +77,12 @@ const EnterModal = ({ isOpen, toggleVis, type, userData }) => {
         <Link
           to={{
             pathname: "/room",
-            state: { type, userData, roomName }
+            state: { type, userData, roomName, roomCodeWord }
           }}
         >
           <Button
             color="success"
-            disabled={!roomName}
+            disabled={!roomName || !roomCodeWord}
           >
             {capitalType}
           </Button>
