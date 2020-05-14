@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-14T16:48:51.578Z-07:00
+* @last-modified 2020-05-14T16:49:28.057Z-07:00
 */
 
 // ----------------------------------------------------
@@ -86,11 +86,7 @@ export default class GameBoard extends Component {
               <Button
                 className="skip-turn-button"
                 color="danger"
-                disabled={
-                  gameData._currentTeamsTurn !== currentUsersTeam
-                  || gameData._currentClue.clueWord === ""
-                  || ![gameData._designatedBlueGuesser, gameData._designatedRedGuesser].includes(currentUserData.userId)
-                }
+                disabled={gameData._currentTeamsTurn !== currentUsersTeam || gameData._currentClue.clueWord === ""}
                 onClick={() => this.changeTeamsTurn()}
               >
                 Skip
