@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Main room component
 * @created 2020-04-11T11:38:00.397Z-07:00
-* @last-modified 2020-05-16T12:49:53.367Z-07:00
+* @last-modified 2020-05-16T19:56:06.745Z-07:00
 */
 
 // ----------------------------------------------------
@@ -19,9 +19,6 @@ import MainGameSelectionContainer from 'components/GameSelection/MainGameSelecti
 import { determineGame } from './determineGameComponent';
 
 import './Room.css';
-
-
-import Timer from 'components/Timer/Timer';
 
 let socket;
 const ENDPOINT = process.env.REACT_APP_SERVER_CONNECT || 'http://localhost:5000/';
@@ -108,10 +105,6 @@ const Room = ({ location }) => {
   return (
     <div className="main-room-container">
       <div className="gameplay-container">
-        <Timer
-          defaultMinutes={0}
-          defaultSeconds={15}
-        />
         {gamePlayContainer}
       </div>
 

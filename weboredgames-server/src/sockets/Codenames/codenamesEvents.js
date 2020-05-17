@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-14T16:46:35.373Z-07:00
+* @last-modified 2020-05-16T19:43:49.270Z-07:00
 */
 
 // ----------------------------------------------------
@@ -97,7 +97,7 @@ const addMemberToTeam = (socket, io) => {
 */
 
 const confirmTeams = (socket, io) => {
-  socket.on("codenamesConfirmTeams", ({ spymasters, userId }, callback) => {
+  socket.on("codenamesConfirmTeams", ({ spymasters, timer, userId }, callback) => {
 
     Room.findOne({ "_users._id": userId })
       .exec()
@@ -108,6 +108,7 @@ const confirmTeams = (socket, io) => {
           .then(currentGame => {
             currentGame._spyMasterRed = spymasters.redSpymaster;
             currentGame._spyMasterBlue = spymasters.blueSpymaster;
+            currentGame._timer = timer;
             currentGame._teamsConfirmed = true;
 
             let redGuesser = "";

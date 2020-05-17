@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Selecting Teams for codenames
 * @created 2020-04-16T11:37:01.583Z-07:00
-* @last-modified 2020-05-16T17:06:04.115Z-07:00
+* @last-modified 2020-05-16T19:43:08.868Z-07:00
 */
 
 // ----------------------------------------------------
@@ -55,8 +55,8 @@ const TeamSelection = (props) => {
     });
   };
 
-  const confirmTeams = (spymasters) => {
-    socket.emit("codenamesConfirmTeams", { spymasters, userId: currentUserData.userId }, () => {
+  const confirmTeams = (spymasters, timer) => {
+    socket.emit("codenamesConfirmTeams", { spymasters, timer, userId: currentUserData.userId }, () => {
     });
   };
 
@@ -147,7 +147,10 @@ const TeamSelection = (props) => {
                 || blueSpymaster === ""
                 || (timerActive && wantedTime === "")
               }
-              onClick={() => confirmTeams({redSpymaster, blueSpymaster})}
+              onClick={() => confirmTeams(
+                {redSpymaster, blueSpymaster},
+                {timerActive, wantedTime}
+              )}
             >
               Confirm Teams
             </Button>
