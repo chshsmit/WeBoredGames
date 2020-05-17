@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Component to activate the timer for Codenames
 * @created 2020-05-16T16:46:21.564Z-07:00
-* @last-modified 2020-05-16T17:09:16.276Z-07:00
+* @last-modified 2020-05-16T17:14:25.681Z-07:00
 */
 
 // ----------------------------------------------------
@@ -29,7 +29,10 @@ const ActivateTimer = ({ timerActive, setTimerStatus, timerLength, changeTimerLe
         label="Activate Timer"
         color="white"
         checked={timerActive}
-        onChange={() => setTimerStatus(!timerActive)}
+        onChange={() => {
+          changeTimerLength("");
+          setTimerStatus(!timerActive);
+        }}
       />
       {timerActive && (
         <Input
