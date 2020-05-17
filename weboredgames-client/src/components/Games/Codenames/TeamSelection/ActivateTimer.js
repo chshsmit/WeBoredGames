@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Component to activate the timer for Codenames
 * @created 2020-05-16T16:46:21.564Z-07:00
-* @last-modified 2020-05-16T17:14:25.681Z-07:00
+* @last-modified 2020-05-16T20:46:23.505Z-07:00
 */
 
 // ----------------------------------------------------
@@ -61,9 +61,10 @@ export default ActivateTimer;
 ActivateTimer.propTypes = {
   timerActive: PropTypes.bool,
   setTimerStatus: PropTypes.func,
-  timerLength: PropTypes.string
+  timerLength: PropTypes.string,
+  changeTimerLength: PropTypes.func
 };
 
 ActivateTimer.defaultProps = {
   timerLength: ""
-}
+};

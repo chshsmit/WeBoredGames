@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main timer component for Codenames
 * @created 2020-05-16T20:10:50.134Z-07:00
-* @last-modified 2020-05-16T20:36:17.312Z-07:00
+* @last-modified 2020-05-16T20:45:03.370Z-07:00
 */
 
 // ----------------------------------------------------
@@ -18,6 +18,8 @@ import './CodenamesTimer.css';
 // ----------------------------------------------------
 
 export default class CodenamesTimer extends Component {
+
+  // ----------------------------------------------------
 
   constructor(props) {
     super(props);
@@ -35,6 +37,8 @@ export default class CodenamesTimer extends Component {
 
     this.resetTimer = this.resetTimer.bind(this);
   }
+
+  // ----------------------------------------------------
 
   componentDidMount() {
     const { timer, socket, userId, currentUserIsRoomLeader } = this.props;
@@ -63,10 +67,13 @@ export default class CodenamesTimer extends Component {
     });
   }
 
+  // ----------------------------------------------------
+
   componentWillUnmount() {
     clearInterval(this.timerInterval);
   }
 
+  // ----------------------------------------------------
 
   resetTimer() {
     this.setState({
@@ -74,6 +81,8 @@ export default class CodenamesTimer extends Component {
       seconds: this.initialSeconds
     });
   }
+
+  // ----------------------------------------------------
 
   render() {
     const { minutes, seconds } = this.state;
