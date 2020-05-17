@@ -1,5 +1,6 @@
 .timer-container {
     display: flex;
+    justify-content: center;
 }
 
 .timer-count {

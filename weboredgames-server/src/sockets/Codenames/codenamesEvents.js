@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-16T19:43:49.270Z-07:00
+* @last-modified 2020-05-16T20:27:33.175Z-07:00
 */
 
 // ----------------------------------------------------
@@ -196,6 +196,7 @@ const changeTeamsTurn = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              io.to(newGame._roomName).emit('resetTimer');
             });
         });
     });
@@ -240,6 +241,7 @@ const giveClue = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              io.to(newGame._roomName).emit('resetTimer');
               callback();
             });
         });
@@ -262,6 +264,9 @@ const wordSelected = (socket, io) => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
+
+
+          let timerNeedsReset = false;
 
           // Need to add the word to the selected word list to start
           currentGame._selectedWords.push(selectedWord.index);
@@ -323,6 +328,7 @@ const wordSelected = (socket, io) => {
             };
 
           } else {
+            timerNeedsReset = true;
             let newTeam = currentGame._currentTeamsTurn === "Red" ? "Blue" : "Red";
 
             if (newTeam === 'Red') {
@@ -362,6 +368,7 @@ const wordSelected = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              if(timerNeedsReset) io.to(newGame._roomName).emit('resetTimer');
             });
         });
     });

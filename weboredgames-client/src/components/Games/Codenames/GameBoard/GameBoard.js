@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-16T19:55:45.703Z-07:00
+* @last-modified 2020-05-16T20:20:18.793Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,7 +20,7 @@ import './GameBoard.css';
 import WordCard from 'components/Games/Codenames/WordCard/WordCard';
 import SpymasterView from 'components/Games/Codenames/SpymasterView/SpymasterView';
 import SpyView from 'components/Games/Codenames/SpyView/SpyView';
-import Timer from 'components/Timer/Timer';
+import CodenamesTimer from 'components/Games/Codenames/CodenamesTimer/CodenamesTimer';
 // import ClueHistory from 'components/Games/Codenames/ClueHistory/ClueHistory';
 
 
@@ -28,45 +28,13 @@ import Timer from 'components/Timer/Timer';
 
 export default class GameBoard extends Component {
 
-  constructor(props) {
-    super(props);
-
-    let minutesAndSeconds = props.gameData._timer.timerActive ?
-         props.gameData._timer.wantedTime.split(',') : [0,0];
-
-    this.state = {
-      minutes: Number(minutesAndSeconds[0]),
-      seconds: Number(minutesAndSeconds[1])
-    };
-
+  constructor() {
+    super();
     this.returnToHomeScreen = this.returnToHomeScreen.bind(this);
     this.startANewGame = this.startANewGame.bind(this);
   }
 
   // ----------------------------------------------------
-
-  componentDidMount() {
-    const { gameData } = this.props;
-    this.timerInterval = gameData._timer.timerActive ? setInterval(() => {
-      const { minutes, seconds } = this.state;
-      if (seconds > 0) {
-        this.setState(({ seconds }) => ({
-          seconds: seconds - 1
-        }));
-      }
-
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(this.timerInterval);
-        } else {
-          this.setState(({ minutes }) => ({
-            minutes: minutes - 1,
-            seconds: 59
-          }));
-        }
-      }
-    }, 1000) : null;
-  }
 
 
   // ----------------------------------------------------
@@ -135,12 +103,6 @@ export default class GameBoard extends Component {
         </div>
         {!gameData._gameResults.gameIsOver ? (
           <>
-            {gameData._timer.timerActive && (
-              <Timer
-                minutes={this.state.minutes}
-                seconds={this.state.seconds}
-              />
-            )}
             {isSpymaster ? (
               <SpymasterView
                 socket={socket}
@@ -155,6 +117,12 @@ export default class GameBoard extends Component {
                 currentUserIsGuesser={currentUsersTeam === "Red" ? gameData._designatedRedGuesser === currentUserData.userId : gameData._designatedBlueGuesser === currentUserData.userId}
               />
             )}
+            <CodenamesTimer
+              socket={socket}
+              timer={gameData._timer}
+              userId={currentUserData.userId}
+              currentUserIsRoomLeader={currentUserIsRoomLeader}
+            />
             {/* <ClueHistory clueHistory={gameData._clueHistory} /> */}
           </>
         ) : (
