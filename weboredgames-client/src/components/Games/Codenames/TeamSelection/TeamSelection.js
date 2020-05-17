@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Selecting Teams for codenames
 * @created 2020-04-16T11:37:01.583Z-07:00
-* @last-modified 2020-05-03T11:43:39.680Z-07:00
+* @last-modified 2020-05-16T19:43:08.868Z-07:00
 */
 
 // ----------------------------------------------------
@@ -18,6 +18,7 @@ import {
 } from 'reactstrap';
 
 import PlayerListItem from './PlayerListItem';
+import ActivateTimer from './ActivateTimer';
 
 import './TeamSelection.css';
 
@@ -43,6 +44,10 @@ const TeamSelection = (props) => {
   const [redSpymaster, setRedSpymaster] = useState("");
   const [blueSpymaster, setBlueSpymaster] = useState("");
 
+  const [timerActive, changeTimerActive] = useState(false);
+  const [wantedTime, setWantedTime] = useState("");
+
+
   // ----------------------------------------------------
 
   const chooseTeam = (wantedTeam) => {
@@ -50,8 +55,8 @@ const TeamSelection = (props) => {
     });
   };
 
-  const confirmTeams = (spymasters) => {
-    socket.emit("codenamesConfirmTeams", { spymasters, userId: currentUserData.userId }, () => {
+  const confirmTeams = (spymasters, timer) => {
+    socket.emit("codenamesConfirmTeams", { spymasters, timer, userId: currentUserData.userId }, () => {
     });
   };
 
@@ -126,18 +131,30 @@ const TeamSelection = (props) => {
       </div>
 
       {roomLeader.leaderId === currentUserData.userId && (
-        <div className="confirm-teams">
-          <Button
-            color="success"
-            disabled={
-              redTeam.length + blueTeam.length < allPlayers.length
-              || redSpymaster === ""
-              || blueSpymaster === ""
-            }
-            onClick={() => confirmTeams({redSpymaster, blueSpymaster})}
-          >
-            Confirm Teams
-          </Button>
+        <div className="game-settings">
+          <ActivateTimer
+            timerActive={timerActive}
+            setTimerStatus={changeTimerActive}
+            timerLength={wantedTime}
+            changeTimerLength={setWantedTime}
+          />
+          <div className="confirm-teams">
+            <Button
+              color="success"
+              disabled={
+                redTeam.length + blueTeam.length < allPlayers.length
+                || redSpymaster === ""
+                || blueSpymaster === ""
+                || (timerActive && wantedTime === "")
+              }
+              onClick={() => confirmTeams(
+                {redSpymaster, blueSpymaster},
+                {timerActive, wantedTime}
+              )}
+            >
+              Confirm Teams
+            </Button>
+          </div>
         </div>
       )}
     </div>

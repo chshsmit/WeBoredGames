@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Events specific to codenames
 * @created 2020-04-16T12:35:07.655Z-07:00
-* @last-modified 2020-05-14T16:46:35.373Z-07:00
+* @last-modified 2020-05-16T20:27:33.175Z-07:00
 */
 
 // ----------------------------------------------------
@@ -97,7 +97,7 @@ const addMemberToTeam = (socket, io) => {
 */
 
 const confirmTeams = (socket, io) => {
-  socket.on("codenamesConfirmTeams", ({ spymasters, userId }, callback) => {
+  socket.on("codenamesConfirmTeams", ({ spymasters, timer, userId }, callback) => {
 
     Room.findOne({ "_users._id": userId })
       .exec()
@@ -108,6 +108,7 @@ const confirmTeams = (socket, io) => {
           .then(currentGame => {
             currentGame._spyMasterRed = spymasters.redSpymaster;
             currentGame._spyMasterBlue = spymasters.blueSpymaster;
+            currentGame._timer = timer;
             currentGame._teamsConfirmed = true;
 
             let redGuesser = "";
@@ -195,6 +196,7 @@ const changeTeamsTurn = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              io.to(newGame._roomName).emit('resetTimer');
             });
         });
     });
@@ -239,6 +241,7 @@ const giveClue = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              io.to(newGame._roomName).emit('resetTimer');
               callback();
             });
         });
@@ -261,6 +264,9 @@ const wordSelected = (socket, io) => {
       Codenames.findOne({"_roomName": result._name})
         .exec()
         .then(currentGame => {
+
+
+          let timerNeedsReset = false;
 
           // Need to add the word to the selected word list to start
           currentGame._selectedWords.push(selectedWord.index);
@@ -322,6 +328,7 @@ const wordSelected = (socket, io) => {
             };
 
           } else {
+            timerNeedsReset = true;
             let newTeam = currentGame._currentTeamsTurn === "Red" ? "Blue" : "Red";
 
             if (newTeam === 'Red') {
@@ -361,6 +368,7 @@ const wordSelected = (socket, io) => {
           currentGame.save()
             .then(newGame => {
               io.to(newGame._roomName).emit('newGameData', { activeGame: newGame });
+              if(timerNeedsReset) io.to(newGame._roomName).emit('resetTimer');
             });
         });
     });

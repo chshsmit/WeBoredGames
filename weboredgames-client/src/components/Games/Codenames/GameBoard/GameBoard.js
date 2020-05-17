@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description The main codenames gameboard
 * @created 2020-04-16T16:53:05.958Z-07:00
-* @last-modified 2020-05-14T16:49:28.057Z-07:00
+* @last-modified 2020-05-16T20:20:18.793Z-07:00
 */
 
 // ----------------------------------------------------
@@ -20,6 +20,7 @@ import './GameBoard.css';
 import WordCard from 'components/Games/Codenames/WordCard/WordCard';
 import SpymasterView from 'components/Games/Codenames/SpymasterView/SpymasterView';
 import SpyView from 'components/Games/Codenames/SpyView/SpyView';
+import CodenamesTimer from 'components/Games/Codenames/CodenamesTimer/CodenamesTimer';
 // import ClueHistory from 'components/Games/Codenames/ClueHistory/ClueHistory';
 
 
@@ -32,6 +33,9 @@ export default class GameBoard extends Component {
     this.returnToHomeScreen = this.returnToHomeScreen.bind(this);
     this.startANewGame = this.startANewGame.bind(this);
   }
+
+  // ----------------------------------------------------
+
 
   // ----------------------------------------------------
 
@@ -113,6 +117,12 @@ export default class GameBoard extends Component {
                 currentUserIsGuesser={currentUsersTeam === "Red" ? gameData._designatedRedGuesser === currentUserData.userId : gameData._designatedBlueGuesser === currentUserData.userId}
               />
             )}
+            <CodenamesTimer
+              socket={socket}
+              timer={gameData._timer}
+              userId={currentUserData.userId}
+              currentUserIsRoomLeader={currentUserIsRoomLeader}
+            />
             {/* <ClueHistory clueHistory={gameData._clueHistory} /> */}
           </>
         ) : (

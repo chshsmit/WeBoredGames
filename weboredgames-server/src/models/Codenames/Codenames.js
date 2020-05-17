@@ -4,7 +4,7 @@
 * @description
 * @created 2020-04-18T16:19:06.840Z-07:00
 * @copyright
-* @last-modified 2020-05-14T16:34:53.991Z-07:00
+* @last-modified 2020-05-16T19:45:24.271Z-07:00
 */
 
 // ----------------------------------------------------
@@ -77,6 +77,9 @@ const codenamesSchema = mongoose.Schema({
       maximumGuesses: 0,
       currentGuesses: 0
     }
+  },
+  _timer: {
+    type: Object
   },
   _gameResults: {
     type: Object,
