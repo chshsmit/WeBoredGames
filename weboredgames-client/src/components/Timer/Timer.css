@@ -1,0 +1,24 @@
+.timer-container {
+    display: flex;
+}
+
+.timer-count {
+  margin-left: 10px;
+
+}
+.timer-still-good {
+    color: white;
+}
+
+.timer-almost-up {
+    color: red;
+    animation: flash-text .3s step-end infinite alternate;
+}
+
+@keyframes flash-text {
+    50% {
+        color: transparent;
+    }
+}
+
+

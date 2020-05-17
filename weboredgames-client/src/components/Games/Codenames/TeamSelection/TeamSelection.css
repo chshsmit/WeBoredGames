@@ -43,10 +43,6 @@
 }
 
 
-.confirm-teams {
-    margin-top: 2vh;
-}
-
 #playerTeamItem {
   display: flex;
   justify-content: space-between;
@@ -65,3 +61,25 @@
     margin-right: 5%;
 }
 
+
+.game-settings {
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 15% 0 15%;
+}
+
+.timer-set {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+}
+
+
+.time-select {
+    margin-left: 10px;
+}
+
+.confirm-teams {
+
+}

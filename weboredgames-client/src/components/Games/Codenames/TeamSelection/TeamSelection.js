@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Selecting Teams for codenames
 * @created 2020-04-16T11:37:01.583Z-07:00
-* @last-modified 2020-05-03T11:43:39.680Z-07:00
+* @last-modified 2020-05-16T17:06:04.115Z-07:00
 */
 
 // ----------------------------------------------------
@@ -18,6 +18,7 @@ import {
 } from 'reactstrap';
 
 import PlayerListItem from './PlayerListItem';
+import ActivateTimer from './ActivateTimer';
 
 import './TeamSelection.css';
 
@@ -42,6 +43,10 @@ const TeamSelection = (props) => {
 
   const [redSpymaster, setRedSpymaster] = useState("");
   const [blueSpymaster, setBlueSpymaster] = useState("");
+
+  const [timerActive, changeTimerActive] = useState(false);
+  const [wantedTime, setWantedTime] = useState("");
+
 
   // ----------------------------------------------------
 
@@ -126,18 +131,27 @@ const TeamSelection = (props) => {
       </div>
 
       {roomLeader.leaderId === currentUserData.userId && (
-        <div className="confirm-teams">
-          <Button
-            color="success"
-            disabled={
-              redTeam.length + blueTeam.length < allPlayers.length
-              || redSpymaster === ""
-              || blueSpymaster === ""
-            }
-            onClick={() => confirmTeams({redSpymaster, blueSpymaster})}
-          >
-            Confirm Teams
-          </Button>
+        <div className="game-settings">
+          <ActivateTimer
+            timerActive={timerActive}
+            setTimerStatus={changeTimerActive}
+            timerLength={wantedTime}
+            changeTimerLength={setWantedTime}
+          />
+          <div className="confirm-teams">
+            <Button
+              color="success"
+              disabled={
+                redTeam.length + blueTeam.length < allPlayers.length
+                || redSpymaster === ""
+                || blueSpymaster === ""
+                || (timerActive && wantedTime === "")
+              }
+              onClick={() => confirmTeams({redSpymaster, blueSpymaster})}
+            >
+              Confirm Teams
+            </Button>
+          </div>
         </div>
       )}
     </div>
