@@ -3,7 +3,7 @@
 * @author Christopher Smith
 * @description Component to activate the timer for Codenames
 * @created 2020-05-16T16:46:21.564Z-07:00
-* @last-modified 2020-05-16T17:05:31.208Z-07:00
+* @last-modified 2020-05-16T17:09:16.276Z-07:00
 */
 
 // ----------------------------------------------------
@@ -21,12 +21,13 @@ import {
 const ActivateTimer = ({ timerActive, setTimerStatus, timerLength, changeTimerLength }) => {
 
   return (
-    <div className="timer-set">
+    <>
       <CustomInput
         type="switch"
         id="timerSwitchId"
         name="timerSwitch"
         label="Activate Timer"
+        color="white"
         checked={timerActive}
         onChange={() => setTimerStatus(!timerActive)}
       />
@@ -35,7 +36,7 @@ const ActivateTimer = ({ timerActive, setTimerStatus, timerLength, changeTimerLe
           value={timerLength}
           type="select"
           placeholder="Set timer length"
-          className="time-select"
+          id="timeSelect"
           onChange={(event) => {
             changeTimerLength(event.target.value);
           }}
@@ -48,7 +49,7 @@ const ActivateTimer = ({ timerActive, setTimerStatus, timerLength, changeTimerLe
           <option value="3,0">3 Minutes</option>
         </Input>
       )}
-    </div>
+    </>
   );
 };
 
